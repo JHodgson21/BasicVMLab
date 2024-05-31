@@ -66,7 +66,7 @@ class UVSim:
             instruction = self.fetch()
             self.decode_execute(instruction)
 
-# Example run
+# Example Run (we will need to use the file the prof gives us).
 program = [
     1007,  # READ to memory location 07
     1008,  # READ to memory location 08
