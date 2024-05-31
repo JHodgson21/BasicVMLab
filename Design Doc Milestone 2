@@ -1,0 +1,61 @@
+Design Document 
+
+ 
+
+Description: 
+
+The UVSim is a simple virtual machine that executes programs written in BasicML machine language.  
+
+ 
+
+User Stories: 
+
+(User Story 1) 
+
+As a UVSim developer 
+
+I want to load and execute BasicML programs on the UVSim 
+
+So that I can learn how machine language works and become more familiar with computer architecture.  
+
+ 
+
+(User Story 2) 
+
+As a client 
+
+I want a UVSim for my students to learn machine language 
+
+So that they can gain a deeper understanding of low-level programming concepts. 
+
+ 
+
+ 
+
+Use Cases:  
+
+#1 Load Program 
+
+Description: This use case describes the process of loading a BasicML program into the UVSim memory starting at location 00 
+
+Actors: Student  
+
+System: UVSim 
+
+Goal: Load a BasicML program in the UVSim memory starting at location 00 
+
+ 
+
+ 
+
+Steps: 
+
+Student inputs the BasicML program into UVSim 
+
+The UVSim reads the input (a signed four-digit number) 
+
+The UVSim stores each instruction into consecutive memory slots 
+
+The UVSim validates that the program fits in the memory and that the instructions are valid instructions. 
+
+The UVSim confirms to the user that the program loaded successfully 
