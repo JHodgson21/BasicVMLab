@@ -77,10 +77,10 @@ program = [
     4300   # HALT
 ]
 
-# Creating a uvsim instance
+# Create a uvsim instance
 uvsim = UVSim()
 
-# Loading the program in memory
+# Loading the program into memory
 uvsim.load_program(program)
 
 #Run it!
