@@ -25,11 +25,20 @@ class UVSim:
 
     def decode_execute(self, instruction):
         """ Decode and execute the instruction """
+        # Ignore first digit of program-loaded instructions as they are always positive. - Ben Carroll
+        instruction = instruction[1:]
         opcode = instruction // 100  # First two digits
         operand = instruction % 100  # Last two digits
 
         if opcode == 10:  # READ
-            value = int(input("Enter an integer: "))
+            # Forces input to be an int. - Ben Carroll
+            while(True):
+                value = input("Enter an integer: ")
+                try:
+                    int(value)
+                    break
+                except ValueError:
+                    print("Not a valid integer.")
             self.memory[operand] = value
         elif opcode == 11:  # WRITE
             print(self.memory[operand])
@@ -67,15 +76,25 @@ class UVSim:
             self.decode_execute(instruction)
 
 # Example Run (we will need to use the file the prof gives us).
-program = [
-    1007,  # READ to memory location 07
-    1008,  # READ to memory location 08
-    2007,  # LOAD from memory location 07
-    3008,  # ADD from memory location 08
-    2109,  # STORE to memory location 09
-    1109,  # WRITE from memory location 09
-    4300   # HALT
-]
+# program = [
+#     1007,  # READ to memory location 07
+#     1008,  # READ to memory location 08
+#     2007,  # LOAD from memory location 07
+#     3008,  # ADD from memory location 08
+#     2109,  # STORE to memory location 09
+#     1109,  # WRITE from memory location 09
+#     4300   # HALT
+# ]
+
+# Should be moved. - Ben Carroll
+def get_program(program_name = "Test1.txt"):
+    program_lines = []
+    with open(program_name, "r") as file:
+        for line in file:
+            program_lines.append(line.rstrip())
+    return program_lines
+
+program = get_program()
 
 # Create a uvsim instance
 uvsim = UVSim()
