@@ -29,6 +29,8 @@ class UVSim:
         instruction = instruction[1:]
         opcode = instruction[:2] # First two digits
         operand = instruction[2:4] # Last two digits
+        opcode = int(opcode)
+        operand = int(operand)
 
         if opcode == 10:  # READ
             # Forces input to be an int. - Ben Carroll
