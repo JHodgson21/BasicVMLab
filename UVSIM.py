@@ -5,6 +5,8 @@ Created on Wed May 22 17:37:33 2024
 @author: Jakob
 """
 
+import sys
+
 class UVSim:
     def __init__(self):
         self.memory = [0] * 100  # 100 memory initialized to zero
@@ -90,6 +92,11 @@ class UVSim:
 
 # Should be moved. - Ben Carroll
 def get_program(program_name = "Test1.txt"):
+    if len(sys.argv) < 2:
+      print("Usage: python UVSIM.py <testFile.txt>")
+      sys.exit()
+    program_name = sys.argv[1]
+    print('Testing: ', program_name)
     program_lines = []
     with open(program_name, "r") as file:
         for line in file:
