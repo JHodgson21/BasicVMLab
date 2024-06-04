@@ -91,7 +91,7 @@ class UVSim:
 # ]
 
 # Should be moved. - Ben Carroll
-def get_program(program_name = "Test1.txt"):
+def get_program():
     if len(sys.argv) < 2:
       print("Usage: python UVSIM.py <testFile.txt>")
       sys.exit()
