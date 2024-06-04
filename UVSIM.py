@@ -27,8 +27,8 @@ class UVSim:
         """ Decode and execute the instruction """
         # Ignore first digit of program-loaded instructions as they are always positive. - Ben Carroll
         instruction = instruction[1:]
-        opcode = instruction // 100  # First two digits
-        operand = instruction % 100  # Last two digits
+        opcode = instruction[:2] # First two digits
+        operand = instruction[2:4] # Last two digits
 
         if opcode == 10:  # READ
             # Forces input to be an int. - Ben Carroll
