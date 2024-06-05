@@ -27,7 +27,7 @@ class UVSim:
 
     def decode_execute(self, instruction):
         """ Decode and execute the instruction """
-        # Ignore first digit of program-loaded instructions as they are always positive. - Ben Carroll
+        # Ignore first digit of program-loaded instructions as they are always positive.
         instruction = instruction[1:]
         opcode = instruction[:2] # First two digits
         operand = instruction[2:4] # Last two digits
@@ -35,14 +35,18 @@ class UVSim:
         operand = int(operand)
 
         if opcode == 10:  # READ
-            # Forces input to be an int. - Ben Carroll
+            # Forces input to be an int.
             while(True):
                 value = input("Enter an integer: ")
-                try:
-                    int(value)
-                    break
-                except ValueError:
-                    print("Not a valid integer.")
+                # If negative, saves as negative int
+                if (value[0] == "-"):
+                    value = -abs(int(value))
+                else:
+                    try:
+                        value = int(value)
+                        break
+                    except ValueError:
+                        print("Not a valid integer.\nnter an integer: ")
             self.memory[operand] = value
         elif opcode == 11:  # WRITE
             print(self.memory[operand])
@@ -90,7 +94,6 @@ class UVSim:
 #     4300   # HALT
 # ]
 
-# Should be moved. - Ben Carroll
 def get_program():
     if len(sys.argv) < 2:
       print("Usage: python UVSIM.py <testFile.txt>")
