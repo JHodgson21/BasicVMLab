@@ -29,8 +29,22 @@ I want a UVSim for my students to learn machine language
 So that they can gain a deeper understanding of low-level programming concepts. 
 
  
+(User Story 3)
+As an end-user
 
- 
+I want to create a UVSim file that includes machine language instructions
+
+So that functionality can be tested in a safe environment.
+
+
+(User Story 4) 
+As a UVSim stakeholder
+
+I want to verify that the program ignores incorrect files
+
+So that the program succeeds with integrity and security.
+
+
 
 Use Cases:  
 
@@ -44,8 +58,24 @@ System: UVSim
 
 Goal: Load a BasicML program in the UVSim memory starting at location 00 
 
- 
 
+#2 I/O Read 
+Description: The program includes functionality to read a word from the keyboard and store it in a specified memory location.
+Actors: Student
+System: UVSim
+Goal: Read a word from the keyboard into a specific location in memory.
+
+#3 I/O Write
+Description: The program can write a word from specific memory locations to the screen.
+Actors: Student
+System: UVSim
+Goal: Write a word from a specific location in memory to the screen.
+
+#4 Load Operations
+Description: The program can load a word from a specific location in memory into the accumulator.
+Actors: Student
+System: UVSim
+Goal: Load a word from a specific location in memory into the accumulator.
  
 
 Steps: 
