@@ -6,7 +6,7 @@ Created on Wed Jun  5 20:31:40 2024
 """
 
 import unittest
-from uvsim2 import UVSim
+from UVSIM import UVSim
 
 class TestUVSim(unittest.TestCase):
 
