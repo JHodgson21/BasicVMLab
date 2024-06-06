@@ -43,7 +43,7 @@ class UVSim:
                 if (value[0] == "-"):
                     negative = True
                 try:
-                    if (negative == True):
+                    if (negative):
                         value = -abs(int(value))
                     else:
                         value = int(value)
