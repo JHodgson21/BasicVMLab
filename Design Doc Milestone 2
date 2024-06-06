@@ -107,3 +107,48 @@ Steps:
 2. UVSim retrieves the number from the desired memory location 
 3. UVSim subtracts the retrieved number to the number in the accumulator 
 4. UVSim updates the accumulator with the result of the subtraction.
+
+#7 Multiplication Operation
+-Jarek
+Description: This use case describes how to perform multiplication in the UVSim, multiplying one number from a specific place in memory to another in the accumulator.
+Actor: Student
+System: UVSim
+Goal: Perform multiplication between two numbers, one from memory and the other that's in the accumulator.
+Steps:
+1. Student initiates the Multiplication operation in the UVSim
+2. UVSim retrieves the number from the desired memory location
+3. UVSim multiplies the retrieved number and the number in the accumulator
+4. UVSim updates the accumulator with the result of the multiplication.
+
+#8 Division Operation
+-Jarek
+Description: This use case describes how to perform division in the UVSim, dividing the number in the accumulator by another number in a specific place in memory.
+Actor: Student
+System: UVSim
+Goal: Perform division between two numbers, one from memory (the divisor) and the other that's in the accumulator (the dividend).
+Steps:
+1. Student initiates the Division operation in the UVSim
+2. UVSim retrieves the number from the desired memory location
+3. UVSim divides the number in the accumulator by the retrieved number
+4. UVSim updates the accumulator with the result of the division
+
+#9 BRANCH Operation
+-Jarek
+Description: This use case describes how to perform a branch operation in the UVSim, branching to a specific place in memory.
+Actor: Student
+System: UVSim
+Goal: Branch to a location specified by the operand.
+Steps:
+1. Student initiates the BRANCH operation in the UVSim
+2. UVSim branches to the desired memory location
+
+#10 BRANCHNEG Operation
+-Jarek
+Description: This use case describes how to perform a BRANCHNEG operation in the UVSim, branching to a specific place in memory only if the accumulator is negative.
+Actor: Student
+System: UVSim
+Goal: Branch to a location specified by the operand if and only if the current value stored in the accumulator is a negative number.
+Steps:
+1. Student initiates the BRANCHNEG operation in the UVSim
+2. UVSim checks if the value in the accumulator is less than zero
+3. If it is, UVSim branches to the desired memory location, otherwise it does not
