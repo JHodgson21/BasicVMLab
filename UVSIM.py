@@ -36,17 +36,20 @@ class UVSim:
 
         if opcode == 10:  # READ
             # Forces input to be an int.
+            negative = False
             while(True):
                 value = input("Enter an integer: ")
                 # If negative, saves as negative int
                 if (value[0] == "-"):
-                    value = -abs(int(value))
-                else:
-                    try:
+                    negative = True
+                try:
+                    if (negative):
+                        value = -abs(int(value))
+                    else:
                         value = int(value)
-                        break
-                    except ValueError:
-                        print("Not a valid integer.\nEnter an integer: ")
+                    break
+                except ValueError:
+                    print("Not a valid integer.\n")
             self.memory[operand] = value
         elif opcode == 11:  # WRITE
             print(self.memory[operand])
