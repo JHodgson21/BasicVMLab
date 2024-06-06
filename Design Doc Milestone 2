@@ -49,14 +49,18 @@ So that the program succeeds with integrity and security.
 Use Cases:  
 
 #1 Load Program 
-
+-Jake
 Description: This use case describes the process of loading a BasicML program into the UVSim memory starting at location 00 
-
 Actors: Student  
-
 System: UVSim 
-
 Goal: Load a BasicML program in the UVSim memory starting at location 00 
+
+Steps: 
+1. Student inputs the BasicML program into UVSim 
+2. The UVSim reads the input (a signed four-digit number) 
+3. The UVSim stores each instruction into consecutive memory slots 
+4. The UVSim validates that the program fits in the memory and that the instructions are valid instructions. 
+5. The UVSim confirms to the user that the program loaded successfully 
 
 
 #2 I/O Read 
@@ -75,17 +79,31 @@ Goal: Write a word from a specific location in memory to the screen.
 Description: The program can load a word from a specific location in memory into the accumulator.
 Actors: Student
 System: UVSim
-Goal: Load a word from a specific location in memory into the accumulator.
- 
+Goal: Load a word from a specific location in memory into the accumulator. 
+
+#5 Addition Operation
+-Jake
+Description: This use case describes how to perform addition in the UVSim, adding one number from a specific place in memory to another in the accumulator. 
+Actor: Student 
+System: UVSim 
+Goal: Perform addition between two numbers, one from memory and the other that's in the accumulator. 
 
 Steps: 
+1. Student initiates the Addition operation in the UVSim 
+2. UVSim retrieves the number from the desired memory location 
+3. UVSim adds the retrieved number to the number in the accumulator 
+4. UVSim updates the accumulator with the result of the addition. 
 
-Student inputs the BasicML program into UVSim 
 
-The UVSim reads the input (a signed four-digit number) 
+#6 Subtraction Operation
+-Jake
+Description: This use case describes how to perform subtraction in the UVSim, subtracting one number from a specific place in memory to another in the accumulator. 
+Actor: Student 
+System: UVSim 
+Goal: Perform subtraction between two numbers, one from memory and the other that's in the accumulator. 
 
-The UVSim stores each instruction into consecutive memory slots 
-
-The UVSim validates that the program fits in the memory and that the instructions are valid instructions. 
-
-The UVSim confirms to the user that the program loaded successfully 
+Steps: 
+1. Student initiates the Subtraction operation in the UVSim 
+2. UVSim retrieves the number from the desired memory location 
+3. UVSim subtracts the retrieved number to the number in the accumulator 
+4. UVSim updates the accumulator with the result of the subtraction.
