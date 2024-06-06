@@ -6,14 +6,15 @@ Created on Wed May 22 17:37:33 2024
 """
 
 import sys
+import os
 # changed 'memory' to instructions
 # added 'memory' to hold values rather than instructions 
-#   previously: instructions were overwritten by new written values (caused errors)
+#   previously: instructions were overwritten by new written values (caused errors when branching)
 class UVSim:
     def __init__(self):
         # changed to 20 for readability while debugging
         self.instructions = [0] * 20#100  # 100 instructions initialized to zero
-        self.memory = [0] * 20 # stores written values; memory location 1: memory[1] 
+        self.memory = [0] * 20#100 # stores written values; memory location 1: memory[1] 
         self.accumulator = 0  # Accumulator register
         self.instruction_counter = 0  #Instructions counter
         self.running = True  # Simulator running
@@ -37,7 +38,7 @@ class UVSim:
         instruction = instruction[1:]
         opcode = instruction[:2] # First two digits
         operand = instruction[2:4] # Last two digits
-        # checked as strs in following blocks (solves 01 vs 1 issue); operated on as ints in each operation
+        # checked as strs in following blocks (solves 01 vs 1 issue); cast to ints for indexing
         opcode = opcode
         operand = operand
 
@@ -109,6 +110,11 @@ def get_program():
       print("Usage: python UVSIM.py <testFile.txt>")
       sys.exit()
     program_name = sys.argv[1]
+
+    if not os.path.exists(program_name):
+        print(f"The file {program_name} does not exist.")
+        sys.exit()
+    
     print('Testing: ', program_name)
     program_lines = []
     with open(program_name, "r") as file:
@@ -123,9 +129,6 @@ uvsim = UVSim()
 
 # Loading the program into instructions
 uvsim.load_program(program)
-
-#Run it!
-uvsim.run()
 
 #Run it!
 uvsim.run()
