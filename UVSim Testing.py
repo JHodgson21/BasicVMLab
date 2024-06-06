@@ -24,7 +24,7 @@ class TestUVSim(unittest.TestCase):
         program = [1007, 9999, 2007, 3108, 2109, 1109, 4300]
         with self.assertRaises(ValueError):
             self.uvsim.load_program(program)
-            self.uvsim.run()  # Ensure invalid instruction is caught during run
+            self.uvsim.run()  # Make sure that the invalid instruction is caught during run
 
     # Test cases for Use Case #5: Addition Operation
 
