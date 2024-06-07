@@ -16,12 +16,12 @@ class TestUVSim(unittest.TestCase):
     # Test cases for Use Case #1: Load Program
 
     def test_successful_program_load(self):
-        program = [1007, 1008, 2007, 3108, 2109, 1109, 4300]
+        program = ['+1007', '+1008', '+2007', '+3108', '+2109', '+1109', '+4300']
         self.uvsim.load_program(program)
-        self.assertEqual(self.uvsim.memory[:len(program)], program)
+        self.assertEqual(self.uvsim.instructions[:len(program)], program)
 
     def test_invalid_instruction(self):
-        program = [1007, 9999, 2007, 3108, 2109, 1109, 4300]
+        program = ['+1007', '+9999', '+2007', '+3108', '+2109', '+1109', '+4300']
         with self.assertRaises(ValueError):
             self.uvsim.load_program(program)
             self.uvsim.run()  # Make sure that the invalid instruction is caught during run
