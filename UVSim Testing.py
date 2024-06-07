@@ -53,32 +53,6 @@ class TestUVSim(unittest.TestCase):
         self.uvsim.accumulator = 10
         self.subtract(5)
         self.assertEqual(self.uvsim.accumulator, -20)
-    
-    # Test cases for Use Case #7: Multiplication Operation
-    def test_successful_multiplication(self):
-        self.uvsim.memory[5] = 3
-        self.uvsim.accumulator = 2
-        self.multiply(5)
-        self.assertEqual(self.uvsim.accumulator, 6)
-    
-    def test_multiplication_resulting_in_negative(self):
-        self.uvsim.memory[5] = 2
-        self.uvsim.accumulator = -6
-        self.multiply(5)
-        self.assertEqual(self.uvsim.accumulator, -12)
-    
-    # Test cases for Use Case #8: Division Operation
-    def test_successful_division(self):
-        self.uvsim.memory[5] = 5
-        self.uvsim.accumulator = 20
-        self.divide(5)
-        self.assertEqual(self.uvsim.accumulator, 4)
-    
-    def test_division_resulting_in_negative(self):
-        self.uvsim.memory[5] = -3
-        self.uvsim.accumulator = 60
-        self.divide(5)
-        self.assertEqual(self.uvsim.accumulator, -20)
 
     # Test cases for Use Case #7: Multiplication Operation
 
