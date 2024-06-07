@@ -82,10 +82,14 @@ class TestUVSim(unittest.TestCase):
 
     # Auxiliary methods for UVSim operations used in tests
     def add(self, memory_location):
-        self.uvsim.decode_execute(3000 + memory_location)
+        add_operation = '+3000'
+        add_operation = add_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(add_operation)
 
     def subtract(self, memory_location):
-        self.uvsim.decode_execute(3100 + memory_location)
+        sub_operation = '+3100'
+        sub_operation = sub_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(sub_operation)
     
     def multiply(self, memory_location):
         self.uvsim.decode_execute(3300 + memory_location)
