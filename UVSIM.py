@@ -2,7 +2,7 @@
 """
 Created on Wed May 22 17:37:33 2024
 
-@author: Jakob
+@authors: Jakob, Ben, Michael, Jarek
 """
 
 import sys

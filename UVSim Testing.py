@@ -2,7 +2,7 @@
 """
 Created on Wed Jun  5 20:31:40 2024
 
-@author: Jakob
+@authors: Jakob, Ben, Michael, Jarek
 """
 
 import unittest
