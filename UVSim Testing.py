@@ -54,13 +54,142 @@ class TestUVSim(unittest.TestCase):
         self.subtract(5)
         self.assertEqual(self.uvsim.accumulator, -20)
 
+    # Test cases for Use Case #7: Multiplication Operation
+
+    def test_successful_multiplication(self):
+        self.uvsim.memory = [0] * 11
+        self.uvsim.memory[8] = 4
+        self.uvsim.memory[9] = 5
+        self.multiply()
+        self.assertEqual(self.uvsim.memory[10], 20)
+    
+    def test_negative_multiplication(self):
+        self.uvsim.memory = [0] * 11
+        self.uvsim.memory[8] = -4
+        self.uvsim.memory[9] = 5
+        self.multiply()
+        self.assertEqual(self.uvsim.memory[10], -20)
+
+    # Test cases for Use Case #8: Division Operation
+
+    def test_successful_division(self):
+        self.uvsim.memory = [0] * 11
+        self.uvsim.memory[8] = 20
+        self.uvsim.memory[9] = 4
+        self.divide()
+        self.assertEqual(self.uvsim.memory[10], 5)
+    
+    def test_divide_by_zero(self):
+        self.uvsim.memory = [0] * 11
+        self.uvsim.memory[8] = 20
+        with self.assertRaises(ZeroDivisionError):
+            self.divide()
+
+    # Test cases for Use Case #9: BRANCH Operation
+
+    def test_successful_branch(self):
+        self.uvsim.instructions = [
+            "+2008", # LOAD 08 TO ACC
+            "+4005", # BRANCH TO 05 (NOTE: The program should skip to location 05 and NOT run operations 02 through 04)
+            "+3309", # MULTIPLY 09 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4300", # TERMINATE
+            "+3310", # MULTIPLY 10 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4300" # TERMINATE
+        ]
+        self.uvsim.memory = [0] * 12
+        self.uvsim.memory[8] = 5
+        self.uvsim.memory[9] = -30
+        self.uvsim.memory[10] = 5
+        self.uvsim.run()
+        self.assertEqual(self.uvsim.memory[11], 25)
+    
+    def test_branch_to_halt(self):
+        self.uvsim.instructions = [
+            "+2008", # LOAD 08 TO ACC 
+            "+2111", # STORE ACC TO 11
+            "+4005", # BRANCH TO 05 (NOTE: The program should skip to 05 and read the instruction there, not pass over it and proceed.)
+            "+2009", # LOAD 09 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4300", # TERMINATE
+            "+2010", # LOAD 10 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4300", # TERMINATE
+        ]
+        self.uvsim.memory = [0] * 12
+        self.uvsim.memory[8], self.uvsim.memory[9], self.uvsim.memory[10] = 1, 2, 3
+        self.uvsim.run()
+        self.assertEqual(self.uvsim.memory[11], 1)
+    
+    # Test cases for Use Case #10: BRANCHNEG Operation
+    
+    def test_successful_branchneg(self):
+        self.uvsim.instructions = [
+            "+2008", # LOAD 08 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4105", # BRANCH TO 05 IF ACC IS NEGATIVE
+            "+2009", # LOAD 09 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4300", # TERMINATE
+            "+2010", # LOAD 10 TO ACC
+            "+2111", # STORE ACC TO 11
+            "+4300", # TERMINATE
+        ]
+        self.uvsim.memory = [0] * 12
+        self.uvsim.memory[8], self.uvsim.memory[9], self.uvsim.memory[10] = 1, -2, 3
+        self.uvsim.run()
+        self.assertEqual(self.uvsim.memory[11], -2)
+
+    def test_branchneg_loop(self):
+        # Runs a loop 6 times to accomplish the expression: 4 * 2^6
+        self.uvsim.instructions = [
+            "+2008", # LOAD 08 TO ACC
+            "+4108", # BRANCH TO 08 IF ACC IS NEGATIVE
+            "+3109", # SUBTRACT 09 FROM ACC (09 IS 1)
+            "+2108", # STORE ACC TO 08
+            "+2010", # LOAD 10 TO ACC
+            "+3311", # MULTIPLY 11 TO ACC
+            "+2110", # STORE ACC TO 10
+            "+4000", # BRANCH TO 00
+            "+2010", # LOAD 10 TO ACC
+            "+2112", # STORE ACC TO 12
+            "+4300", # TERMINATE
+        ]
+        self.uvsim.memory = [0] * 13
+        self.uvsim.memory[8] = 5 # Iterator
+        self.uvsim.memory[9] = 1 # Incrementor
+        self.uvsim.memory[10] = 4 # Number to be multiplied
+        self.uvsim.memory[11] = 2 # Multiplier
+        self.uvsim.run()
+        self.assertEqual(self.uvsim.memory[12], 256)
+
     # Auxiliary methods for UVSim operations used in tests
     def add(self, memory_location):
         self.uvsim.decode_execute(3000 + memory_location)
 
     def subtract(self, memory_location):
         self.uvsim.decode_execute(3100 + memory_location)
+    
+    def multiply(self):
+        self.uvsim.instructions = [
+            "+2008", # LOAD 08 TO ACC
+            "+3309", # MULTIPLY 09 TO ACC
+            "+2110", # STORE TO 10
+            "+1108", # WRITE 10 TO SCREEN
+            "+4300"  # TERMINATE
+        ]
+        self.uvsim.run()
 
+    def divide(self):
+        self.uvsim.instructions = [
+            "+2008", # LOAD 08 TO ACC
+            "+3209", # DIVIDE ACC BY 09
+            "+2110", # STORE TO 10
+            "+1108", # WRITE 10 TO SCREEN
+            "+4300" #TERMINATE
+        ]
+        self.uvsim.run()
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)

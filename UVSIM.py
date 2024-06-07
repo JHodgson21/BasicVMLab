@@ -35,6 +35,7 @@ class UVSim:
     def decode_execute(self, instruction):
         """ Decode and execute the instruction """
         # Ignore first digit of program-loaded instructions as they are always positive.
+        instruction = str(instruction)
         instruction = instruction[1:]
         opcode = instruction[:2] # First two digits
         operand = instruction[2:4] # Last two digits
