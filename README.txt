@@ -10,9 +10,10 @@ Before running the UVSim, make sure that you have Python Installed on your syste
 
 Installation: 
 1. Clone the UVSim repository from GitHub 
-2. git clone https://github.com/JHodgson21/CS-2450-Group-Project.git 
-3. This link is important because here you will be able to obtain the UVSim codebase from our GitHub. By cloning the repository you’ll be able to access the source code and run the program on your own computer.  
-4. Navigate to the project directory if needed (cd CS-2450-Group-Project) 
+2. Open your computer's command line interface
+3. Type in the following: git clone https://github.com/JHodgson21/CS-2450-Group-Project.git 
+4. This link is important because here you will be able to obtain the UVSim codebase from our GitHub. By cloning the repository you’ll be able to access the source code and run the program on your own computer.  
+5. Navigate to the project directory if needed (cd CS-2450-Group-Project) 
 
  
 
