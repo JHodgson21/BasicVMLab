@@ -7,6 +7,10 @@ Created on Wed May 22 17:37:33 2024
 
 import sys
 import os
+
+# Name of unittest file
+TESTFILE = "UVSim Testing.py"
+
 # changed 'memory' to instructions
 # added 'memory' to hold values rather than instructions 
 #   previously: instructions were overwritten by new written values (caused errors when branching)
@@ -107,15 +111,24 @@ class UVSim:
 # ]
 
 def get_program():
+    # If the current file is the unittest, load an empty program without needing a file as an argument
+    if sys.argv[0] == TESTFILE:
+        program_lines = [
+            '+4300' # IMMEDIATELY TERMINATE PROGRAM
+        ]
+        return program_lines
+    
     if len(sys.argv) < 2:
       print("Usage: python UVSIM.py <testFile.txt>")
       sys.exit()
     program_name = sys.argv[1]
 
+
+    
     if not os.path.exists(program_name):
         print(f"The file {program_name} does not exist.")
         sys.exit()
-    
+
     print('Testing: ', program_name)
     program_lines = []
     with open(program_name, "r") as file:

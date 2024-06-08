@@ -6,6 +6,8 @@ Created on Wed Jun  5 20:31:40 2024
 """
 
 import unittest
+import unittest.mock
+import io
 from UVSIM import UVSim
 
 class TestUVSim(unittest.TestCase):
@@ -25,6 +27,31 @@ class TestUVSim(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.uvsim.load_program(program)
             self.uvsim.run()  # Make sure that the invalid instruction is caught during run
+
+    #Test Cases for Use Case #3: Write Operation
+
+    def test_successful_write(self):
+        program = [
+            '+1108', # READ 08 TO SCREEN
+            '+4300'  # TERMINATE
+        ]
+        self.uvsim.load_program(program)
+        self.uvsim.memory[8] = 5
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            self.uvsim.run()
+            self.assertEqual(mock_stdout.getvalue(), '5\n')
+    
+    def test_multiple_writes(self):
+        program = [
+            '+1108', # READ 08 TO SCREEN
+            '+1109', # READ 09 TO SCREEN
+            '+4300'  # TERMINATE
+        ]
+        self.uvsim.load_program(program)
+        self.uvsim.memory[8], self.uvsim.memory[9] = 14, 72
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            self.uvsim.run()
+            self.assertEqual(mock_stdout.getvalue(), '14\n72\n')
 
     # Test cases for Use Case #5: Addition Operation
 
