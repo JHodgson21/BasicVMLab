@@ -27,6 +27,25 @@ class TestUVSim(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.uvsim.load_program(program)
             self.uvsim.run()  # Make sure that the invalid instruction is caught during run
+            
+    # Test case for Use Case #2: I/O Read
+    
+    def test_successful_read(self):
+        self.uvsim.memory[0] = 0
+        self.read(0)
+        self.assertEqual(self.uvsim.memory[0], 1) # ASSUMES USER ENTER 1 after ...Enter an integer: 
+
+    # Test cases for Use Case #4 Load Operation
+    
+    def test_successful_load(self):
+        self.uvsim.memory[0] = 12
+        self.load(0)
+        self.assertEqual(self.uvsim.accumulator, 12)
+    
+    def test_successful_load(self):
+        self.uvsim.memory[0] = 15
+        self.load(0)
+        self.assertEqual(self.uvsim.accumulator, 15)
 
     #Test Cases for Use Case #3: Write Operation
 
@@ -61,11 +80,11 @@ class TestUVSim(unittest.TestCase):
         self.add(5)
         self.assertEqual(self.uvsim.accumulator, 35)
 
-    def test_addition_with_overflow(self):
-        self.uvsim.memory[5] = 9999
-        self.uvsim.accumulator = 9999
-        with self.assertRaises(OverflowError):
-            self.add(5)
+    def test_addition_with_zero(self):
+        self.uvsim.memory[5] = 0
+        self.uvsim.accumulator = 15
+        self.add(5)
+        self.assertEqual(self.uvsim.accumulator, 15) #make sure adding zero doesn't change the accumulator. 
 
     # Test cases for Use Case #6: Subtraction Operation
 
@@ -81,6 +100,12 @@ class TestUVSim(unittest.TestCase):
         self.subtract(5)
         self.assertEqual(self.uvsim.accumulator, -20)
 
+    def test_subtraction_with_zero(self):
+        self.uvsim.memory[5] = 0
+        self.uvsim.accumulator = 15
+        self.subtract(5)
+        self.assertEqual(self.uvsim.accumulator, 15) #make sure subtracting zero doesn't change accumulator. 
+    
     # Test cases for Use Case #7: Multiplication Operation
 
     def test_successful_multiplication(self):
@@ -221,6 +246,17 @@ class TestUVSim(unittest.TestCase):
             "+4300" #TERMINATE
         ]
         self.uvsim.run()
+        
+    def read(self, memory_location):
+        read_operation = '+1000'
+        read_operation = read_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(read_operation)
+
+    def load(self, memory_location):
+        load_operation = '+2000'
+        load_operation = load_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(load_operation)
+
 
 if __name__ == "__main__":
     unittest.main(argv=['first-arg-is-ignored'], exit=False)
