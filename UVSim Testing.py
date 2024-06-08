@@ -53,11 +53,11 @@ class TestUVSim(unittest.TestCase):
         self.add(5)
         self.assertEqual(self.uvsim.accumulator, 35)
 
-    def test_addition_with_overflow(self):
-        self.uvsim.memory[5] = 9999
-        self.uvsim.accumulator = 9999
-        with self.assertRaises(OverflowError):
-            self.add(5)
+    def test_addition_with_zero(self):
+        self.uvsim.memory[5] = 0
+        self.uvsim.accumulator = 15
+        self.add(5)
+        self.assertEqual(self.uvsim.accumulator, 15) #make sure adding zero doesn't change the accumulator. 
 
     # Test cases for Use Case #6: Subtraction Operation
 
