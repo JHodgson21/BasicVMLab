@@ -72,6 +72,12 @@ class TestUVSim(unittest.TestCase):
         self.uvsim.accumulator = 10
         self.subtract(5)
         self.assertEqual(self.uvsim.accumulator, -20)
+
+    def test_subtraction_with_zero(self):
+        self.uvsim.memory[5] = 0
+        self.uvsim.accumulator = 15
+        self.subtract(5)
+        self.assertEqual(self.uvsim.accumulator, 15) #make sure subtracting zero doesn't change accumulator. 
     
     # Test cases for Use Case #7: Multiplication Operation
     def test_successful_multiplication(self):
