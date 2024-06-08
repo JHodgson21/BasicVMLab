@@ -125,7 +125,7 @@ class TestUVSim(unittest.TestCase):
     def test_multiplication_with_zero(self):
         self.uvsim.memory[5] = 0
         self.uvsim.accumulator = 15
-        self.multiply(5)
+        self.multiply()
         self.assertEqual(self.uvsim.accumulator, 0)
 
     # Test cases for Use Case #8: Division Operation
@@ -252,7 +252,7 @@ class TestUVSim(unittest.TestCase):
             "+4300" #TERMINATE
         ]
         self.uvsim.run()
-        
+
     def read(self, memory_location):
         read_operation = '+1000'
         read_operation = read_operation[:-1] + str(memory_location)
