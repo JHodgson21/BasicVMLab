@@ -2,7 +2,7 @@
 """
 Created on Wed Jun  5 20:31:40 2024
 
-@author: Jakob
+@authors: Jakob, Ben, Michael, Jarek
 """
 
 import unittest
@@ -16,12 +16,12 @@ class TestUVSim(unittest.TestCase):
     # Test cases for Use Case #1: Load Program
 
     def test_successful_program_load(self):
-        program = [1007, 1008, 2007, 3108, 2109, 1109, 4300]
+        program = ['+1007', '+1008', '+2007', '+3108', '+2109', '+1109', '+4300']
         self.uvsim.load_program(program)
-        self.assertEqual(self.uvsim.memory[:len(program)], program)
+        self.assertEqual(self.uvsim.instructions[:len(program)], program)
 
     def test_invalid_instruction(self):
-        program = [1007, 9999, 2007, 3108, 2109, 1109, 4300]
+        program = ['+1007', '+9999', '+2007', '+3108', '+2109', '+1109', '+4300']
         with self.assertRaises(ValueError):
             self.uvsim.load_program(program)
             self.uvsim.run()  # Make sure that the invalid instruction is caught during run
@@ -166,10 +166,14 @@ class TestUVSim(unittest.TestCase):
 
     # Auxiliary methods for UVSim operations used in tests
     def add(self, memory_location):
-        self.uvsim.decode_execute(3000 + memory_location)
+        add_operation = '+3000'
+        add_operation = add_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(add_operation)
 
     def subtract(self, memory_location):
-        self.uvsim.decode_execute(3100 + memory_location)
+        sub_operation = '+3100'
+        sub_operation = sub_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(sub_operation)
     
     def multiply(self):
         self.uvsim.instructions = [
