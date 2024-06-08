@@ -122,6 +122,12 @@ class TestUVSim(unittest.TestCase):
         self.multiply()
         self.assertEqual(self.uvsim.memory[10], -20)
 
+    def test_multiplication_with_zero(self):
+        self.uvsim.memory[5] = 0
+        self.uvsim.accumulator = 15
+        self.multiply(5)
+        self.assertEqual(self.uvsim.accumulator, 0)
+
     # Test cases for Use Case #8: Division Operation
 
     def test_successful_division(self):
