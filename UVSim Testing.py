@@ -25,6 +25,25 @@ class TestUVSim(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.uvsim.load_program(program)
             self.uvsim.run()  # Make sure that the invalid instruction is caught during run
+            
+    # Test case for Use Case #2: I/O Read
+    
+    def test_successful_read(self):
+        self.uvsim.memory[0] = 0
+        self.read(0)
+        self.assertEqual(self.uvsim.memory[0], 1) # ASSUMES USER ENTER 1 after ...Enter an integer: 
+
+    # Test cases for Use Case #4 Load Operation
+    
+    def test_successful_load(self):
+        self.uvsim.memory[0] = 12
+        self.load(0)
+        self.assertEqual(self.uvsim.accumulator, 12)
+    
+    def test_successful_load(self):
+        self.uvsim.memory[0] = 15
+        self.load(0)
+        self.assertEqual(self.uvsim.accumulator, 15)
 
     # Test cases for Use Case #5: Addition Operation
 
@@ -96,6 +115,16 @@ class TestUVSim(unittest.TestCase):
     
     def divide(self, memory_location):
         self.uvsim.decode_execute(3200 + memory_location)
+
+    def read(self, memory_location):
+        read_operation = '+1000'
+        read_operation = read_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(read_operation)
+
+    def load(self, memory_location):
+        load_operation = '+2000'
+        load_operation = load_operation[:-1] + str(memory_location)
+        self.uvsim.decode_execute(load_operation)
 
 
 if __name__ == "__main__":
