@@ -17,8 +17,8 @@ TESTFILE = "UVSim Testing.py"
 class UVSim:
     def __init__(self):
         # changed to 20 for readability while debugging
-        self.instructions = [0] * 20#100  # 100 instructions initialized to zero
-        self.memory = [0] * 20#100 # stores written values; memory location 1: memory[1] 
+        self.instructions = [0] * 100  # 100 instructions initialized to zero
+        self.memory = [0] * 100 # stores written values; memory location 1: memory[1] 
         self.accumulator = 0  # Accumulator register
         self.instruction_counter = 0  #Instructions counter
         self.running = True  # Simulator running
