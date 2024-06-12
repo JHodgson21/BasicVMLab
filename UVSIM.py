@@ -95,9 +95,49 @@ class UVSim:
 
     def run(self):
         """ Run the simulation """
+        # Generating program
+        program = self.get_program()
+        # Loading the program into instructions
+        self.load_program(program)
         while self.running:
             instruction = self.fetch()
             self.decode_execute(instruction)
+    
+    def get_program(self):
+    # If the current file is the unittest, load an empty program without needing a file as an argument
+        if sys.argv[0] == TESTFILE:
+            program_lines = [
+                '+4300' # IMMEDIATELY TERMINATE PROGRAM
+            ]
+            return program_lines
+        
+        if len(sys.argv) < 2:
+            print("Usage: python UVSIM.py <testFile.txt>")
+            sys.exit()
+        program_name = sys.argv[1]
+        
+        if not os.path.exists(program_name):
+            print(f"The file {program_name} does not exist.")
+            sys.exit()
+
+        print('Testing: ', program_name)
+        program_lines = []
+        mem = False
+        mem_location = 0
+        with open(program_name, "r") as file:
+            for line in file:
+                if(mem):
+                    if(line[0] == "-"):
+                        self.memory[mem_location] = -abs(int(line.rstrip()))
+                    else:
+                        self.memory[mem_location] = int(line.rstrip())
+                    mem_location += 1
+                else:
+                    program_lines.append(line.rstrip())
+                if (not mem and line[1:3] == "43"):
+                    mem = True
+        print(self.memory)
+        return program_lines
 
 # Example Run (we will need to use the file the prof gives us).
 # program = [
@@ -110,39 +150,50 @@ class UVSim:
 #     4300   # HALT
 # ]
 
-def get_program():
-    # If the current file is the unittest, load an empty program without needing a file as an argument
-    if sys.argv[0] == TESTFILE:
-        program_lines = [
-            '+4300' # IMMEDIATELY TERMINATE PROGRAM
-        ]
-        return program_lines
+# def get_program():
+#     # If the current file is the unittest, load an empty program without needing a file as an argument
+#     if sys.argv[0] == TESTFILE:
+#         program_lines = [
+#             '+4300' # IMMEDIATELY TERMINATE PROGRAM
+#         ]
+#         return program_lines
     
-    if len(sys.argv) < 2:
-      print("Usage: python UVSIM.py <testFile.txt>")
-      sys.exit()
-    program_name = sys.argv[1]
+#     if len(sys.argv) < 2:
+#       print("Usage: python UVSIM.py <testFile.txt>")
+#       sys.exit()
+#     program_name = sys.argv[1]
 
 
     
-    if not os.path.exists(program_name):
-        print(f"The file {program_name} does not exist.")
-        sys.exit()
+#     if not os.path.exists(program_name):
+#         print(f"The file {program_name} does not exist.")
+#         sys.exit()
 
-    print('Testing: ', program_name)
-    program_lines = []
-    with open(program_name, "r") as file:
-        for line in file:
-            program_lines.append(line.rstrip())
-    return program_lines
+#     print('Testing: ', program_name)
+#     program_lines = []
+#     mem = False
+#     i = 0
+#     with open(program_name, "r") as file:
+#         for line in file:
+#             if(mem):
+#                 preloaded_memory[i] = line[1:]
+#                 ++i
+#             else:
+#                 program_lines.append(line.rstrip())
+#             if (not mem and line[1:3] == "43"):
+#                 mem = True
+    # with open(program_name, "r") as file:
+    #     for line in file:
+    #         program_lines.append(line.rstrip())
+    # return program_lines
 
-program = get_program()
+# program = get_program()
 
 # Create a uvsim instance
 uvsim = UVSim()
 
 # Loading the program into instructions
-uvsim.load_program(program)
+# uvsim.load_program(program)
 
 #Run it!
 uvsim.run()
