@@ -54,7 +54,10 @@ class UVSim:
                     break
                 except ValueError:
                     print("Not a valid integer.\n")
-            self.memory[operand] = value
+            if int(value) < 0:
+                self.memory[operand] = value.zfill(5)
+            else:
+                self.memory[operand] = '+' + value.zfill(4)
 
         elif opcode == '11':  # WRITE
             print(int(self.memory[operand]))

@@ -34,7 +34,7 @@ class TestUVSim(unittest.TestCase):
     def test_successful_read(self, mock_input):
         self.uvsim.memory[0] = 0
         self.read(0)
-        self.assertEqual(self.uvsim.memory[0], '1') # ASSUMES USER ENTER 1 after ...Enter an integer: 
+        self.assertEqual(int(self.uvsim.memory[0]), 1) # ASSUMES USER ENTER 1 after ...Enter an integer: 
 
     # Test cases for Use Case #4 Load Operation
     
