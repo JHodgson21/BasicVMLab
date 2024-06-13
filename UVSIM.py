@@ -108,17 +108,6 @@ class UVSim:
             instruction = self.fetch()
             self.decode_execute(instruction)
 
-# Example Run (we will need to use the file the prof gives us).
-# program = [
-#     1007,  # READ to instructions location 07
-#     1008,  # READ to instructions location 08
-#     2007,  # LOAD from instructions location 07
-#     3008,  # ADD from instructions location 08
-#     2109,  # STORE to instructions location 09
-#     1109,  # WRITE from instructions location 09
-#     4300   # HALT
-# ]
-
 def get_program():
     # If the current file is the unittest, load an empty program without needing a file as an argument
     if sys.argv[0] == TESTFILE:
@@ -147,9 +136,5 @@ program = get_program()
 
 # Create a uvsim instance
 uvsim = UVSim()
-
-# Loading the program into instructions
 uvsim.load_program(program)
-
-#Run it!
 uvsim.run()
