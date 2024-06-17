@@ -1,0 +1,24 @@
+Functional Requirements
+The program shall read a provided text file in top-down order.
+The program shall interpret each line from the text file as an instruction. 
+The program shall read the first half of each instruction as an operation.
+The program shall read the last two characters of each instruction as a memory location.
+The program shall perform a READ operation if the operation equals "10".
+The program shall perform a WRITE operation if the operation equals "11".
+The program shall perform a LOAD operation if the operation equals "20".
+The program shall perform a STORE operation if the operation equals "21".
+The program shall perform a ADD operation if the operation equals "30".
+The program shall perform a SUBTRACT operation if the operation equals "31".
+The program shall perform a DIVIDE operation if the operation equals "32".
+The program shall perform a MULTIPLY operation if the operation equals "33".
+The program shall change memory registers if the operation equals "40".
+The program shall change memory registers if the operation equals "41".
+The program shall change memory registers if the operation equals "42".
+The program shall change memory registers if the operation equals "43".
+The program shall use a so-called accumulator value for operational use.
+The program shall perform the operation from the instruction on the value in the accumulator.
+
+Non-Functional Requirements
+The program shall have a GUI to remove the requirement of the command-line interface.
+The program shall have comments in the code to allow for future maintainance.
+The program shall provide an error message to the user if an error is thrown.
