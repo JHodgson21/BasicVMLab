@@ -2,7 +2,7 @@
 """
 Created on Thu Jun 20 11:22:37 2024
 
-@author: Jakob
+@author: Jakob, Jarek, Ben, Michael
 """
 
 import tkinter as tk
@@ -21,23 +21,23 @@ class UVSimGUI:
         self.create_widgets()
 
     def create_widgets(self):
-        #area to display output. we can make this bigger if we want. 
+        # area to display output. we can make this bigger if we want. 
         self.output_text = ScrolledText(self.master, width=60, height=20)
         self.output_text.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 
-        #Button that will let you search for a file. 
+        # Button that will let you search for a file. 
         self.load_button = tk.Button(self.master, text="Load Program", command=self.load_program)
         self.load_button.grid(row=1, column=0, padx=10, pady=5)
 
-        #After loading in your file you need to 'run' it by hitting this button. 
+        # After loading in your file you need to 'run' it by hitting this button. 
         self.run_button = tk.Button(self.master, text="Run", command=self.run_program)
         self.run_button.grid(row=1, column=1, padx=10, pady=5)
 
-        #Button to reset the GUI
+        # Button to reset the GUI
         self.reset_button = tk.Button(self.master, text="Reset", command=self.reset_program)
         self.reset_button.grid(row=1, column=2, padx=10, pady=5)
 
-        #Button to Quits the GUI
+        # Button to Quits the GUI
         self.quit_button = tk.Button(self.master, text="Quit", command=self.master.quit)
         self.quit_button.grid(row=2, column=1, padx=10, pady=5)
 
