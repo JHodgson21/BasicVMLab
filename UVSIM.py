@@ -2,7 +2,7 @@
 """
 Created on Wed May 22 17:37:33 2024
 
-@authors: Jakob, Ben, Michael, Jarek
+@author: Jakob
 """
 
 import sys
@@ -11,65 +11,40 @@ import os
 # Name of unittest file
 TESTFILE = "UVSim Testing.py"
 
-# merged memory and instructions into just "memory". ability to overwrite instructions is intended
 class UVSim:
     def __init__(self):
-        # changed to 20 for readability while debugging
-        self.memory = [0] * 100 # stores written values; memory location 1: memory[1] 
-        self.accumulator = 0  # Accumulator register
-        self.instruction_counter = 0  #Instructions counter
-        self.running = True  # Simulator running
+        self.memory = [0] * 100
+        self.accumulator = 0
+        self.instruction_counter = 0
+        self.running = True
 
     def load_program(self, program):
-        """ Load the program into the instructions starting at location 0 """
+        """ Load the program into memory starting at location 0 """
         for i, instruction in enumerate(program):
             self.memory[i] = instruction
 
     def fetch(self):
         """ Fetch the next instruction """
         instruction = self.memory[self.instruction_counter]
-        #print('memory', self.memory) # REMOVE LATER (DEBUG)
-        #print('instructions', self.instructions) #REMOVE LATER (DEBUG)
         self.instruction_counter += 1 
         return instruction
 
     def decode_execute(self, instruction):
         """ Decode and execute the instruction """
-        # Ignore first digit of program-loaded instructions as they are always positive.
-        #instruction = str(instruction)
-        if instruction[:1] in '+-': # Checks if the current instruction begins with a sign. If it does, ignore it
-            instruction = instruction[1:]
-        opcode = instruction[:2] # First two digits
-        operand = instruction[2:4] # Last two digits
-        # checked as strs in following blocks (solves 01 vs 1 issue); cast to ints for indexing
-        #opcode = opcode
-        operand = int(operand) # Operand references point in memory
-    
+        opcode = instruction[:2]
+        operand = int(instruction[2:4])
+
         if opcode == '10':  # READ
-            # Forces input to be an int.
-            while(True):
-                value = input("Enter an integer: ")
-                try:
-                    int(value) # Checks to make sure the input can be converted to an input NOT SURE IF THIS IS REQUIRED
-                    break
-                except ValueError:
-                    print("Not a valid integer.\n")
-            if int(value) < 0:
-                self.memory[operand] = value.zfill(5)
-            else:
-                self.memory[operand] = '+' + value.zfill(4)
+            self.read_input(operand)
 
         elif opcode == '11':  # WRITE
-            print(int(self.memory[operand]))
+            self.write_output(operand)
 
         elif opcode == '20':  # LOAD
             self.accumulator = int(self.memory[operand])
 
         elif opcode == '21':  # STORE
-            if int(self.accumulator) < 0: # If negative, fill with an extra digit because "-" counts as a character
-                self.memory[operand] = str(self.accumulator).zfill(5)
-            else:
-                self.memory[operand] = '+' + str(self.accumulator).zfill(4)
+            self.memory[operand] = str(self.accumulator).zfill(4)
 
         elif opcode == '30':  # ADD
             self.accumulator += int(self.memory[operand])
@@ -98,43 +73,56 @@ class UVSim:
 
         elif opcode == '43':  # HALT
             self.running = False
+
         else:
             raise ValueError(f"Unknown opcode {opcode}")
 
     def run(self):
-        """ Run the simulation """
-        # Loading the program into instructions
+        """ Run the simulations """
         while self.running:
             instruction = self.fetch()
             self.decode_execute(instruction)
 
-def get_program():
-    # If the current file is the unittest, load an empty program without needing a file as an argument
+    def read_input(self, operand):
+        """ Reads the input from user """
+        value = input("Enter an integer: ")
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValueError("Input must be an integer.")
+        
+        if value < 0:
+            self.memory[operand] = str(value).zfill(5)
+        else:
+            self.memory[operand] = '+' + str(value).zfill(4)
+
+    def write_output(self, operand):
+        """ Write output to console """
+        print(int(self.memory[operand]))
+
+def get_program(program_file):
+    """ Read program from file """
     if sys.argv[0] == TESTFILE:
-        program_lines = [
-            '+4300' # IMMEDIATELY TERMINATE PROGRAM
-        ]
+        return ['+4300']  #termination for unittest
+    else:
+        if not os.path.exists(program_file):
+            raise FileNotFoundError(f"The file {program_file} does not exist.")
+        
+        program_lines = []
+        with open(program_file, "r") as file:
+            for line in file:
+                program_lines.append(line.strip())
         return program_lines
-    
+
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-      print("Usage: python UVSIM.py <testFile.txt>")
-      sys.exit()
-    program_name = sys.argv[1]
+        print("Usage: python UVSIM.py <program_file.txt>")
+        sys.exit(1)
 
-    if not os.path.exists(program_name):
-        print(f"The file {program_name} does not exist.")
-        sys.exit()
+    program_file = sys.argv[1]
+    program = get_program(program_file)
 
-    print('Testing: ', program_name)
-    program_lines = []
-    with open(program_name, "r") as file:
-        for line in file:
-            program_lines.append(line.rstrip())
-    return program_lines
+    uvsim = UVSim()
+    uvsim.load_program(program)
+    uvsim.run()
 
-program = get_program()
-
-# Create a uvsim instance
-uvsim = UVSim()
-uvsim.load_program(program)
-uvsim.run()
