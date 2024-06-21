@@ -57,7 +57,7 @@ class UVSimGUI:
         try:
             while self.uvsim.running:
                 instruction = self.uvsim.fetch()
-                if instruction[:2] == '10':  # Handle READ opcode
+                if instruction[1:3] == '10':  # Handle READ opcode
                     self.handle_read(instruction)
                 else:
                     self.uvsim.decode_execute(instruction)

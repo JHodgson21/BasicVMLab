@@ -31,7 +31,7 @@ class UVSim:
 
     def decode_execute(self, instruction):
         """ Decode and execute the instruction """
-        opcode = instruction[:2]
+        opcode = instruction[1:3]
         operand = int(instruction[2:4])
 
         if opcode == '10':  # READ
