@@ -49,12 +49,28 @@ This txt file explained
 ‘+4300’: This instruction is a HALT operation. It will halt the program, indicating to the computer that the program has finished running.  
 
 
-Run the UVSim application using Python, providing a test file as a command-line argument, example below. 
-python UVSIM.py (yourfile.txt) 
+Run the UVSim application using Python, providing the name of the python file (UVSimGUI.py), example below. 
+python UVSimGUI.py
 
-After running the above command (provided that your txt file is same as the one I provided in the example above.). You’ll get a prompt to enter a number. Enter a number. You’ll then be prompted again to enter another number. Enter a second number. After entering the second number the UVSim will show you the sum of those two numbers. 
+After inputting the line above the GUI will pop up on your screen. 
+Follow the instructions below to use the GUI
 
- 
+Loading the program:
+1. Click the "Load Program" button.
+2. A file dialog will appear. Navigate to your '.txt' file that contains the program instructions and select it.
+3. The program will be loaded, and you will see a confirmation message appear in the output text area. 
+
+Running the program:
+1. After loading the program, click the "Run" button.
+2. If the program requires any input, a prompt will appear in the GUI for you to enter the required values.
+3. The output of the program, including any WRITE operations and the final accumulator value, will be displayed in the output text area. 
+
+Resetting the program:
+1. Click the "Reset" button to clear the current program and reset the UVSim instance.
+2. This will clear the output text area and reset the internal state of the UVSim.
+
+Quitting the application:
+1. Click the "Quit" button to close the UVSim GUI.
 
 How the BasicML vocabulary works within the UVSim.  
 
