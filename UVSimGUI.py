@@ -75,6 +75,8 @@ class UVSimGUI:
         if value is not None:
             if value < -9999 or value > 9999:
                 messagebox.showerror("Error", "Input must be between -9999 and 9999.")
+            elif value < 0:
+                self.uvsim.memory[operand] = str(-abs(int(value))).zfill(4)
             else:
                 self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
                 self.output_text.insert(tk.END, f"Input added: {value}\n")
