@@ -1,0 +1,21 @@
+Functional Requirements
+The program shall set memory aside for an accumulator variable
+The program shall set memory aside for storing values in memory addresses.
+The program shall take machine instructions as input.
+The program shall store each instruction in memory.
+The program shall work through each instruction in FIFO order.
+The program shall decipher each instruction and its parts.
+The program shall read in data from the keyboard if the deciphered instruction is read in as 10.
+The program shall write a word from a specific memory location to the screen if the operation is understood as 11.
+The program shall load a word from a specific location in memory into the accumulator if the operation is understood as 20.
+The program shall store a word from the accumulator in a specific location in memory if the operation is understood as 21.
+The program shall add a word from a specific location in memory to the word in the accumulator if the operation is understood as 30.
+The program shall subtract a word from a specific location in memory from the word in the accumulator if the operation is understood as 31.
+The program shall divide the word in the accumulator by a word from a specific location in memory if the operation is understood as 32.
+The program shall multiply a word from a specific location in memory to the word in the accumulator if the operation is understood as 33.
+The program shall branch to a specific location in memory if the operation is understood as 40.
+
+Non-Functional Requirements
+The program shall replace the CLI with a GUI.
+The program shall have visual memory addresses shown in the GUI.
+The program shall have a visual accumulator variable shown in the GUI.
