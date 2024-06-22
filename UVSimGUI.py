@@ -23,8 +23,13 @@ class UVSimGUI:
 
     def create_widgets(self):
         # area to display output. we can make this bigger if we want. 
-        self.output_text = ScrolledText(self.master, width=60, height=20)
+        self.output_text = ScrolledText(self.master, width=50, height=20)
         self.output_text.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
+
+        # area to display program readout. will likely want to make this the main display when finished.
+        self.readout_text = ScrolledText(self.master, width=20, height=20)
+        self.readout_text.grid(row=0, column=4, padx=10, pady=10)
+        self.write_to_readout("Program output:")
 
         # Button that will let you search for a file. 
         self.load_button = tk.Button(self.master, text="Load Program", command=self.load_program)
@@ -93,15 +98,21 @@ class UVSimGUI:
     def handle_write(self, instruction):
         """ Handle WRITE opcode """
         operand = int(instruction[3:5]) # gets the operand from instruction
-        self.output_text.insert(tk.END, self.uvsim.memory[operand] + '\n')
+        self.write_to_readout(self.uvsim.memory[operand])
 
     def reset_program(self):
         """ Reset button callback function """
         self.uvsim = UVSim()  # reset the UVSim instance
         self.program = []     # reset the loaded program
         self.output_text.delete(1.0, tk.END)  # clears all the output text. 
+        self.readout_text.delete(1.0, tk.END) # clears all the readout text.
         self.program_loaded = False # resets the flag
         self.output_text.insert(tk.END, "Program reset.\n")
+        self.write_to_readout("Program output:")
+    
+    def write_to_readout(self, str):
+        """ Writes a string to the readout display """
+        self.readout_text.insert(tk.END, str + '\n')
 
 if __name__ == "__main__":
     root = tk.Tk()
