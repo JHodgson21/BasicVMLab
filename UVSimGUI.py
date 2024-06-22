@@ -93,6 +93,7 @@ class UVSimGUI:
         self.uvsim = UVSim()  # reset the UVSim instance
         self.program = []     # reset the loaded program
         self.output_text.delete(1.0, tk.END)  # clears all the output text. 
+        self.program_loaded = False # resets the flag
         self.output_text.insert(tk.END, "Program reset.\n")
 
 if __name__ == "__main__":
