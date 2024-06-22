@@ -64,6 +64,8 @@ class UVSimGUI:
                 instruction = self.uvsim.fetch()
                 if instruction[1:3] == '10':  # Handle READ opcode
                     self.handle_read(instruction)
+                elif instruction[1:3] == '11': # Handle WRITE opcode
+                    self.handle_write(instruction)
                 else:
                     self.uvsim.decode_execute(instruction)
 
@@ -87,6 +89,11 @@ class UVSimGUI:
                 self.output_text.insert(tk.END, f"Input added: {value}\n")
         else:
             messagebox.showwarning("Warning", "No input provided.")
+
+    def handle_write(self, instruction):
+        """ Handle WRITE opcode """
+        operand = int(instruction[3:5]) # gets the operand from instruction
+        self.output_text.insert(tk.END, self.uvsim.memory[operand] + '\n')
 
     def reset_program(self):
         """ Reset button callback function """
