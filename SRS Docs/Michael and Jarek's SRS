@@ -1,0 +1,51 @@
+UVSim SRS Document
+
+
+Purpose
+UVSim is an easy-to-use program to help computer science students learn the basics of 
+machine language and computer architecture. 
+
+
+Description
+The desired outcome for UVSim is that it will be a lightweight machine language interpreter 
+for the language MLBasic capable of running programs written in that language.
+
+
+Definitions
+- Word: A 4-digit signed (+ or -) number that represents either an instruction, a value, 
+or an empty space.
+o Operator: A two-digit instruction for the program to act on a location in 
+memory. The operator is the first half of an instructional word, optionally 
+preceded by a sign.
+o Operand: The two-digit location in memory of information to be acted upon 
+by the operator. The operand is the second half of an instructional word.
+- Accumulator: A memory register that temporarily holds a word for use in 
+mathematical operations or for writing to the screen
+
+
+Requirements
+
+Functional Requirements
+- The program shall set memory aside for an accumulator variable
+- The program shall set memory aside for storing values in memory addresses.
+- The program shall take machine instructions as input.
+- The program shall store each instruction in memory.
+- The program shall work through each instruction in FIFO order.
+- The program shall decipher each instruction and its parts.
+- The program shall read in data from the keyboard if the deciphered instruction is read in as 10.
+- The program shall write a word from a specific memory location to the screen if the operation is understood as 11.
+- The program shall load a word from a specific location in memory into the accumulator if the operation is understood as 20.
+- The program shall store a word from the accumulator in a specific location in memory if the operation is understood as 21.
+- The program shall add a word from a specific location in memory to the word in the accumulator if the operation is understood as 30.
+- The program shall subtract a word from a specific location in memory from the word in the accumulator if the operation is understood as 31.
+- The program shall divide the word in the accumulator by a word from a specific location in memory if the operation is understood as 32.
+- The program shall multiply a word from a specific location in memory to the word in the accumulator if the operation is understood as 33.
+- The program shall branch to a specific location in memory if the operation is understood as 40.
+
+
+Non-Functional
+- The system shall display the loaded program after it has loaded it
+- The program shall replace the CLI with a GUI.
+- The program shall have visual memory addresses shown in the GUI.
+- The program shall have a visual accumulator variable shown in the GUI.
+
