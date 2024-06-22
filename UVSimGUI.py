@@ -19,6 +19,7 @@ class UVSimGUI:
         self.uvsim = UVSim()  # for creating an instance of UVSim
         self.program = []     # variable to hold the loaded program. 
         self.create_widgets()
+        self.program_loaded = False
 
     def create_widgets(self):
         # area to display output. we can make this bigger if we want. 
@@ -49,11 +50,15 @@ class UVSimGUI:
                 self.program = get_program(program_file)
                 self.uvsim.load_program(self.program)
                 self.output_text.insert(tk.END, f"Program loaded successfully: {program_file}\n")
+                self.program_loaded = True
         except Exception as e:
             messagebox.showerror("Error", f"Error loading program: {str(e)}")
 
     def run_program(self):
         """ Run button callback function """
+        if(not self.program_loaded):
+            messagebox.showerror("Error", "No program loaded.")
+            return
         try:
             while self.uvsim.running:
                 instruction = self.uvsim.fetch()
