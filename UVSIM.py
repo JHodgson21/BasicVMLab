@@ -7,7 +7,7 @@ Created on Wed May 22 17:37:33 2024
 
 import sys
 # import os
-from FileLoader import FileLoader
+from FL import FileLoader
 
 # Name of unittest file
 # TESTFILE = "UVSim Testing.py"
@@ -121,7 +121,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     program_file = sys.argv[1]
-    file = FileLoader(program_file)
+    file = FileLoader()
+    file.program_name = program_file
     program = file.get_program()
 
     uvsim = UVSim()

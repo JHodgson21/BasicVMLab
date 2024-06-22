@@ -8,9 +8,10 @@ Created on Thu Jun 20 11:22:37 2024
 import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog
 from tkinter.scrolledtext import ScrolledText
+from FL import FileLoader
 
 # need to import the UVSim class from UVSIM.py
-from UVSIM import UVSim, get_program
+from UVSIM import UVSim
 
 class UVSimGUI:
     def __init__(self, master):
@@ -20,14 +21,15 @@ class UVSimGUI:
         self.program = []     # variable to hold the loaded program. 
         self.create_widgets()
         self.program_loaded = False
+        self.file = FileLoader() # For loading files
 
     def create_widgets(self):
         # area to display output. we can make this bigger if we want. 
-        self.output_text = ScrolledText(self.master, width=50, height=20)
+        self.output_text = ScrolledText(self.master, width=30, height=20)
         self.output_text.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
 
         # area to display program readout. will likely want to make this the main display when finished.
-        self.readout_text = ScrolledText(self.master, width=20, height=20)
+        self.readout_text = ScrolledText(self.master, width=30, height=20)
         self.readout_text.grid(row=0, column=4, padx=10, pady=10)
         self.write_to_readout("Program output:")
 
@@ -52,7 +54,8 @@ class UVSimGUI:
         try:
             program_file = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
             if program_file:
-                self.program = get_program(program_file)
+                self.file.program_name = program_file
+                self.program = self.file.get_program()
                 self.uvsim.load_program(self.program)
                 self.output_text.insert(tk.END, f"Program loaded successfully: {program_file}\n")
                 self.program_loaded = True
