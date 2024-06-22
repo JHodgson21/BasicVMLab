@@ -6,10 +6,11 @@ Created on Wed May 22 17:37:33 2024
 """
 
 import sys
-import os
+# import os
+from FileLoader import FileLoader
 
 # Name of unittest file
-TESTFILE = "UVSim Testing.py"
+# TESTFILE = "UVSim Testing.py"
 
 class UVSim:
     def __init__(self):
@@ -100,19 +101,19 @@ class UVSim:
         """ Write output to console """
         print(int(self.memory[operand]))
 
-def get_program(program_file):
-    """ Read program from file """
-    if sys.argv[0] == TESTFILE:
-        return ['+4300']  #termination for unittest
-    else:
-        if not os.path.exists(program_file):
-            raise FileNotFoundError(f"The file {program_file} does not exist.")
+# def get_program(program_file):
+#     """ Read program from file """
+#     if sys.argv[0] == TESTFILE:
+#         return ['+4300']  #termination for unittest
+#     else:
+#         if not os.path.exists(program_file):
+#             raise FileNotFoundError(f"The file {program_file} does not exist.")
         
-        program_lines = []
-        with open(program_file, "r") as file:
-            for line in file:
-                program_lines.append(line.strip())
-        return program_lines
+#         program_lines = []
+#         with open(program_file, "r") as file:
+#             for line in file:
+#                 program_lines.append(line.strip())
+#         return program_lines
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -120,7 +121,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     program_file = sys.argv[1]
-    program = get_program(program_file)
+    file = FileLoader(program_file)
+    program = file.get_program()
 
     uvsim = UVSim()
     uvsim.load_program(program)
