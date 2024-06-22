@@ -77,7 +77,7 @@ class UVSimGUI:
 
     def handle_read(self, instruction):
         """ Handle READ opcode """
-        operand = int(instruction[2:4])  # gets the operand from instruction
+        operand = int(instruction[3:5])  # gets the operand from instruction
         value = simpledialog.askinteger("Input", "Enter an integer:")
         if value is not None:
             if value < -9999 or value > 9999:
