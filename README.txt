@@ -58,7 +58,17 @@ Follow the instructions below to use the GUI
 Loading the program:
 1. Click the "Load Program" button.
 2. A file dialog will appear. Navigate to your '.txt' file that contains the program instructions and select it.
-3. The program will be loaded, and you will see a confirmation message appear in the output text area. 
+3. The program will be loaded, and you will see a confirmation message appear in the output text area.
+4. On the second half of the screen you will also see the contents or 'instructions' in your .txt file. 
+
+Editing the program:
+1. You can edit the program instructions directly within the GUI on the lower half of the screen.
+2. You can add, modify, delete, cut, copy, and paste within the GUI. 
+3. After you've finished editing you can either hit 'Run' or 'Save Program'.
+
+Saving Edited Programs:
+1. After editing, you can click "Save Program" to save it as a new file. 
+2. Choose a directory and enter a filename to save the edited program as a '.txt' file.
 
 Running the program:
 1. After loading the program, click the "Run" button.
@@ -68,6 +78,16 @@ Running the program:
 Resetting the program:
 1. Click the "Reset" button to clear the current program and reset the UVSim instance.
 2. This will clear the output text area and reset the internal state of the UVSim.
+
+Configuring the Color Scheme:
+1. The color sceheme is set to a default UVU Green.
+2. To change the color scheme hit the button 'Change Color Scheme'.
+3. The GUI will show some default colors as well as allowing the user to choose any color they'd like.
+4. The first color you pick will be for the outline of the GUI and the second color will be for the button color as well as the background color. 
+5. Once you find the first color you like select the color or type in the RGB values of it on the right hand side of the screen and click 'ok'.
+    - If you'd like to save that specific color hit 'Add To Custom Colors'.
+6. After clicking 'ok' you'll choose your second color by selecting it or manually typing in the RGB values of it on the right hand side of the screen. Then once you're finished click 'ok'.
+7. The color you chose will carry over throughout your sessions!
 
 Quitting the application:
 1. Click the "Quit" button to close the UVSim GUI.
@@ -97,7 +117,6 @@ BRANCHZERO = 42 Branch to a specific location in memory if the accumulator is ze
 HALT = 43 Stop the program 
 
  
-
 Other txt files (ideas) 
 
 Subtracting two numbers: 
