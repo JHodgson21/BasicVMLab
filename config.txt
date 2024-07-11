@@ -1,0 +1,2 @@
+primary_color = #60a35c
+off_color = #ffffff
