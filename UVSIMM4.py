@@ -2,7 +2,7 @@
 """
 Created on Thu Jul 11 14:37:02 2024
 
-@author: Jakob
+@author: Jakob, Jarek, Ben, Michael
 """
 
 # Name of unittest file
