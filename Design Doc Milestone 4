@@ -135,3 +135,25 @@ Steps:
 1. Control unit initiates the BRANCHNEG operation in the UVSim
 2. Control unit checks if the value in the accumulator is less than zero
 3. If it is, UVSim branches to the desired memory location, otherwise it does not
+
+#11 Editing Programs in GUI
+Description: Edit BasicML program instructions within the UVSim GUI, including adding, modifying, deleting, cutting, copying and pasting instructions.
+Actor: User/Student
+System: UVSim GUI
+Goal: Allow users to edit BasicML program instructions before execution.
+Steps:
+1. User loads a program into the UVSim GUI.
+2. User edits program instructions directly within the GUI interface.
+3. UVSim GUI validates and updates the program instructions in memory.
+4. UVSim GUI confirms to the user that edits are saved and ready for execution.
+
+#12 Saving Edited Programs
+Description: Save edited BasicML programs from the UVSim GUI to the file system under a user-chosen directory and filename.
+Actor: Student
+System: UVSim GUI
+Goal: Allow users to save edited BasicML program instructions to a '.txt' file.
+Steps:
+1. User edits a program within the UVSim GUI.
+2. User clicks the 'Save Program' button in the UVSim GUI
+3. UVSim GUI prompts the user to choose a directory and enter a new filename.
+4. UVSim GUI saves the edited program instructions as a '.txt' file in the specified location. 
