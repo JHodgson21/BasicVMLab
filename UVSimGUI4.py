@@ -2,7 +2,7 @@
 """
 Created on Thu Jul 11 14:44:23 2024
 
-@author: Jakob
+@author: Jakob, Jarek, Ben, Michael
 """
 
 import tkinter as tk
