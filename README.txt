@@ -139,3 +139,13 @@ Multiplying two numbers:
 +2109 
 +1109 
 +4300 
+
+Other Files That Are Needed to Run the Software:
+
+Configuration File (config.txt)
+The config.txt file is used to store the default color scheme for the UVSIM. It contains two lines, the first is the primary color and the second line is for the off color. 
+The default colors are set to be UVU's colors which is a darkish green and white. 
+You don't need to mess with this config.txt file. If you'd like to change the color you can do it through the GUI. ( SEE Configuring The Color Scheme ABOVE ).
+
+FL.py
+The FL.py file contains the 'FileLoader' class which is responsible for loading programs from text files into the UVSIM.
