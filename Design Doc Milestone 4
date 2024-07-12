@@ -153,7 +153,7 @@ Actor: Student
 System: UVSim GUI
 Goal: Allow users to save edited BasicML program instructions to a '.txt' file.
 Steps:
-1. User edits a program within the UVSim GUI.
-2. User clicks the 'Save Program' button in the UVSim GUI
-3. UVSim GUI prompts the user to choose a directory and enter a new filename.
-4. UVSim GUI saves the edited program instructions as a '.txt' file in the specified location. 
+1. User edits a program within the UVSim GUI from any user-specified folder/directory.
+2. User clicks the 'Save Program' button in the UVSim GUI.
+3. UVSim GUI prompts the user to choose any directory and enter a new filename.
+4. UVSim GUI saves the edited program instructions as a '.txt' file in the user-specified folder/directory. 
