@@ -9,9 +9,10 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog, colorchooser
 from tkinter.scrolledtext import ScrolledText
 import os
+from FL import FileLoader
 
 # Import the UVSim class from UVSIM.py
-from UVSIMM4 import UVSim, get_program
+from UVSIMM4 import UVSim
 
 CONFIG_FILE = "config.txt" #this file contains UVU's colors for the main start up
 
@@ -21,6 +22,7 @@ class UVSimGUI:
         self.master.title("UVSim GUI")
         self.uvsim = UVSim()  # creating an instance of UVSim
         self.program = []     # variable to hold the loaded program
+        self.file = FileLoader()
         
         # Load color scheme from configuration file
         self.primary_color, self.off_color = self.load_color_scheme()
@@ -98,7 +100,8 @@ class UVSimGUI:
         try:
             program_file = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
             if program_file:
-                self.program = get_program(program_file)
+                self.file.program_name = program_file
+                self.program = self.file.get_program()
                 self.uvsim.load_program(self.program)
                 self.program_text.delete(1.0, tk.END)
                 for line in self.program:

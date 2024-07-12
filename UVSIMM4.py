@@ -4,6 +4,8 @@ Created on Thu Jul 11 14:37:02 2024
 
 @author: Jakob, Jarek, Ben, Michael
 """
+import sys
+from FL import FileLoader
 
 # Name of unittest file
 TESTFILE = "UVSim Testing.py"
@@ -62,7 +64,21 @@ class UVSim:
     def output(self, operand):
         print(int(self.memory[operand]))
 
-def get_program(filename):
-    with open(filename, 'r') as file:
-        program = [line.strip() for line in file.readlines()]
-    return program
+# def get_program(filename):
+#     with open(filename, 'r') as file:
+#         program = [line.strip() for line in file.readlines()]
+#     return program
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python UVSIM.py <program_file.txt>")
+        sys.exit(1)
+
+    program_file = sys.argv[1]
+    file = FileLoader()
+    file.program_name = program_file
+    program = file.get_program()
+
+    uvsim = UVSim()
+    uvsim.load_program(program)
+    uvsim.run()
