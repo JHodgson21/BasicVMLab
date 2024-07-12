@@ -12,7 +12,7 @@ import os
 from FL import FileLoader
 
 # Import the UVSim class from UVSIM.py
-from UVSIMM4 import UVSim
+from UVSIM import UVSim
 
 CONFIG_FILE = "config.txt" #this file contains UVU's colors for the main start up
 
