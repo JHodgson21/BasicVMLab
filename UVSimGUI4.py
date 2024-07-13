@@ -29,6 +29,9 @@ class UVSimGUI:
         
         self.create_widgets()
 
+        # Clear existing log to prepare for new log
+        self.clear_log()
+
     def load_color_scheme(self):
         """Load color scheme from the configuration file."""
         if os.path.exists(CONFIG_FILE):
@@ -106,7 +109,7 @@ class UVSimGUI:
                 self.program_text.delete(1.0, tk.END)
                 for line in self.program:
                     self.program_text.insert(tk.END, line + '\n')
-                self.output_text.insert(tk.END, f"Program loaded successfully: {program_file}\n")
+                self.write_to_log(f"Program loaded successfully: {program_file}")
         except Exception as e:
             messagebox.showerror("Error", f"Error loading program: {str(e)}")
 
@@ -123,7 +126,7 @@ class UVSimGUI:
                 with open(program_file, 'w') as file:
                     for line in self.program:
                         file.write(line + '\n')
-                self.output_text.insert(tk.END, f"Program saved successfully: {program_file}\n")
+                self.write_to_log(f"Program saved successfully: {program_file}")
         except Exception as e:
             messagebox.showerror("Error", f"Error saving program: {str(e)}")
 
@@ -136,17 +139,19 @@ class UVSimGUI:
                 messagebox.showerror("Error", "Program exceeds the maximum of 100 instructions.")
                 return
             self.uvsim.load_program(self.program)
-            self.output_text.insert(tk.END, "Starting program execution...\n")
+            self.write_to_log("Starting program execution...")
 
             while self.uvsim.running:
                 instruction = self.uvsim.fetch()
                 if instruction[1:3] == '10':  # Handle READ opcode
                     self.handle_read(instruction)
+                elif instruction[1:3] == '11': # Handle WRITE opcode
+                    self.handle_write(instruction)
                 else:
                     self.uvsim.decode_execute(instruction)
 
-            self.output_text.insert(tk.END, f"Accumulator = {self.uvsim.accumulator}\n")
-            self.output_text.insert(tk.END, "Program execution completed.\n")
+            self.write_to_log(f"Accumulator = {self.uvsim.accumulator}")
+            self.write_to_log("Program execution completed.")
 
         except Exception as e:
             messagebox.showerror("Error", f"Error running program: {str(e)}")
@@ -160,9 +165,15 @@ class UVSimGUI:
                 messagebox.showerror("Error", "Input must be between -9999 and 9999.")
             else:
                 self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
-                self.output_text.insert(tk.END, f"Input added: {value}\n")
+                self.write_to_log(f"Input added: {value}")
         else:
             messagebox.showwarning("Warning", "No input provided.")
+
+    def handle_write(self, instruction):
+        """Handle WRITE opcode"""
+        operand = int(instruction[3:5]) # Get the operand from instruction
+        value = self.uvsim.memory[operand] # Get the value at the specified location in memory
+        self.write_to_output(value)
 
     def reset_program(self):
         """Reset button callback function."""
@@ -170,7 +181,7 @@ class UVSimGUI:
         self.program = []     # Reset the loaded program
         self.output_text.delete(1.0, tk.END)  # Clear all the output text
         self.program_text.delete(1.0, tk.END)  # Clear the program text
-        self.output_text.insert(tk.END, "Program reset.\n")
+        self.write_to_output("Program reset.")
 
     def change_color_scheme(self):
         """Change Color Scheme button callback function."""
@@ -205,6 +216,20 @@ class UVSimGUI:
             self.program_text.delete(f"{current_index}.0", f"{current_index}.end")
         except tk.TclError:
             pass
+    
+    def write_to_output(self, output: str) -> None:
+        """Write a string to the output_text panel"""
+        self.output_text.insert(tk.END, output + "\n")
+
+    def write_to_log(self, logstring: str) -> None:
+        """Write a string to an external log file"""
+        with open("log.txt", "a") as file:
+            file.write(logstring + "\n")
+
+    def clear_log(self) -> None:
+        """Clears the external log file"""
+        with open("log.txt", "w") as file:
+            file.write("")
 
 if __name__ == "__main__":
     root = tk.Tk()
