@@ -64,11 +64,6 @@ class UVSim:
     def output(self, operand):
         print(int(self.memory[operand]))
 
-# def get_program(filename):
-#     with open(filename, 'r') as file:
-#         program = [line.strip() for line in file.readlines()]
-#     return program
-
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python UVSIM.py <program_file.txt>")
