@@ -22,7 +22,6 @@ class UVSimGUI:
         self.master.title("UVSim GUI")
         self.uvsim = UVSim()  # creating an instance of UVSim
         self.program = []     # variable to hold the loaded program
-        self.file = FileLoader()
         
         # Load color scheme from configuration file
         self.primary_color, self.off_color = self.load_color_scheme()
@@ -103,8 +102,8 @@ class UVSimGUI:
         try:
             program_file = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
             if program_file:
-                self.file.program_name = program_file
-                self.program = self.file.get_program()
+                self.uvsim.file.program_name = program_file
+                self.program = self.uvsim.file.get_program()
                 self.uvsim.load_program(self.program)
                 self.program_text.delete(1.0, tk.END)
                 for line in self.program:
@@ -143,10 +142,10 @@ class UVSimGUI:
 
             while self.uvsim.running:
                 instruction = self.uvsim.fetch()
-                if instruction[1:3] == '10':  # Handle READ opcode
-                    self.handle_read(instruction)
-                elif instruction[1:3] == '11': # Handle WRITE opcode
-                    self.handle_write(instruction)
+                if instruction[0] == 10:  # Handle READ opcode
+                    self.handle_read(instruction[1])
+                elif instruction[0] == 11: # Handle WRITE opcode
+                    self.handle_write(instruction[1])
                 else:
                     self.uvsim.decode_execute(instruction)
 
@@ -156,9 +155,9 @@ class UVSimGUI:
         except Exception as e:
             messagebox.showerror("Error", f"Error running program: {str(e)}")
 
-    def handle_read(self, instruction):
+    def handle_read(self, val):
         """Handle READ opcode."""
-        operand = int(instruction[3:5])  # Get the operand from instruction
+        operand = int(val)  # Get the operand from instruction
         value = simpledialog.askinteger("Input", "Enter an integer:")
         if value is not None:
             if value < -9999 or value > 9999:
@@ -171,7 +170,7 @@ class UVSimGUI:
 
     def handle_write(self, instruction):
         """Handle WRITE opcode"""
-        operand = int(instruction[3:5]) # Get the operand from instruction
+        operand = instruction # Get the operand from instruction
         value = self.uvsim.memory[operand] # Get the value at the specified location in memory
         self.write_to_output(value)
 

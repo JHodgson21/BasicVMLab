@@ -6,6 +6,7 @@ Created on Thu Jul 11 14:37:02 2024
 """
 import sys
 from FL import FileLoader
+from IH import InstructionHandler
 
 # Name of unittest file
 TESTFILE = "UVSim Testing.py"
@@ -16,6 +17,7 @@ class UVSim:
         self.accumulator = 0
         self.instruction_counter = 0
         self.running = True
+        self.file = FileLoader()
 
     def load_program(self, program):
         for i, instruction in enumerate(program):
@@ -24,13 +26,15 @@ class UVSim:
         self.running = True
 
     def fetch(self):
-        instruction = self.memory[self.instruction_counter]
+        inst = self.memory[self.instruction_counter]
+        instruction = InstructionHandler(inst).parse()
         self.instruction_counter += 1
         return instruction
 
     def decode_execute(self, instruction):
-        operation = int(instruction[1:3])
-        operand = int(instruction[3:5])
+        
+        operation = instruction[0]
+        operand = instruction[1]
         if instruction[0] == '-':
             operation = -operation
 
@@ -70,10 +74,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     program_file = sys.argv[1]
-    file = FileLoader()
-    file.program_name = program_file
-    program = file.get_program()
-
     uvsim = UVSim()
+    uvsim.file.program_name = program_file
+    program = uvsim.file.get_program()
+
     uvsim.load_program(program)
     uvsim.run()
