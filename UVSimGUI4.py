@@ -104,6 +104,8 @@ class UVSimGUI:
             if program_file:
                 self.uvsim.file.program_name = program_file
                 self.program = self.uvsim.file.get_program()
+                if (len(self.program) > 250):
+                    raise Exception(f"Programs must be no more than 250 lines long.")
                 self.uvsim.load_program(self.program)
                 self.program_text.delete(1.0, tk.END)
                 for line in self.program:

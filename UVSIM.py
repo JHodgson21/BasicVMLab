@@ -20,10 +20,15 @@ class UVSim:
         self.file = FileLoader()
 
     def load_program(self, program):
-        for i, instruction in enumerate(program):
-            self.memory[i] = instruction
-        self.instruction_counter = 0
-        self.running = True
+        try:
+            if (len(program) > 250):
+                raise Exception("Programs must be no more than 250 lines long.")
+            for i, instruction in enumerate(program):
+                self.memory[i] = instruction
+            self.instruction_counter = 0
+            self.running = True
+        except Exception as e:
+            print(f"Unable to load program: {str(e)}")
 
     def fetch(self):
         inst = self.memory[self.instruction_counter]
