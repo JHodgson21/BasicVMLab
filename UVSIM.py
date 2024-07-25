@@ -9,10 +9,18 @@ import sys
 
 class UVSim:
     def __init__(self):
+<<<<<<< Updated upstream
         self.memory = [0] * 100  # 100 memory initialized to zero
         self.accumulator = 0  # Accumulator register
         self.instruction_counter = 0  #Instructions counter
         self.running = True  # Simulator running
+=======
+        self.memory = ['+000000'] * 250  # Initialize memory with +0000
+        self.accumulator = 0
+        self.instruction_counter = 0
+        self.running = True
+        self.file = FileLoader()
+>>>>>>> Stashed changes
 
     def load_program(self, program):
         """ Load the program into the memory starting at location 0 """
@@ -20,11 +28,24 @@ class UVSim:
             self.memory[i] = instruction
 
     def fetch(self):
+<<<<<<< Updated upstream
         """ Fetch the next instruction """
         instruction = self.memory[self.instruction_counter]
+=======
+        inst = self.memory[self.instruction_counter]
+        print(inst)
+        length = len(inst) - 1
+        if (length == 4):
+            instruction = InstructionHandler4(inst).parse()
+        elif (length == 6):
+            instruction = InstructionHandler6(inst).parse()
+        else:
+            raise Exception("Invalid instruction length")
+>>>>>>> Stashed changes
         self.instruction_counter += 1
-        return instruction
+        return [instruction,length]
 
+<<<<<<< Updated upstream
     def decode_execute(self, instruction):
         """ Decode and execute the instruction """
         # Ignore first digit of program-loaded instructions as they are always positive.
@@ -33,6 +54,14 @@ class UVSim:
         operand = instruction[2:4] # Last two digits
         opcode = int(opcode)
         operand = int(operand)
+=======
+    def decode_execute(self, instruction, inst_length):
+        
+        operation = instruction[0]
+        operand = instruction[1]
+        if instruction[0] == '-':
+            operation = -operation
+>>>>>>> Stashed changes
 
         if opcode == 10:  # READ
             # Forces input to be an int.
@@ -77,6 +106,7 @@ class UVSim:
                 self.instruction_counter = operand
         elif opcode == 43:  # HALT
             self.running = False
+<<<<<<< Updated upstream
         else:
             raise ValueError(f"Unknown opcode {opcode}")
 
@@ -85,6 +115,26 @@ class UVSim:
         while self.running:
             instruction = self.fetch()
             self.decode_execute(instruction)
+=======
+        
+        try:
+            self.validate(self.accumulator, inst_length)
+        except Exception as e:
+            return e
+        
+
+    def output(self, operand):
+        print(int(self.memory[operand]))
+    
+    def validate(self, acc, len):
+        if (len == 4):
+            if (acc > 9999):
+                raise Exception("Overflow: Accumulator is greater than memory linit of 9999.")
+            elif (acc > 999999):
+                raise Exception("Overflow: Accumulator is greater than memory linit of 999999.")
+            else:
+                raise Exception("Instruction length invalid.")
+>>>>>>> Stashed changes
 
 # Example Run (we will need to use the file the prof gives us).
 # program = [
