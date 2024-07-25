@@ -6,14 +6,14 @@ Created on Thu Jul 11 14:37:02 2024
 """
 import sys
 from FL import FileLoader
-from IH import InstructionHandler
+from IH import InstructionHandler4, InstructionHandler6
 
 # Name of unittest file
 TESTFILE = "UVSim Testing.py"
 
 class UVSim:
     def __init__(self):
-        self.memory = ['+0000'] * 100  # Initialize memory with +0000
+        self.memory = ['+000000'] * 249  # Initialize memory with +0000
         self.accumulator = 0
         self.instruction_counter = 0
         self.running = True
@@ -27,7 +27,10 @@ class UVSim:
 
     def fetch(self):
         inst = self.memory[self.instruction_counter]
-        instruction = InstructionHandler(inst).parse()
+        if (inst.length == 4):
+            instruction = InstructionHandler4(inst).parse()
+        elif (inst.length == 6):
+            instruction = InstructionHandler6(inst).parse()
         self.instruction_counter += 1
         return instruction
 
