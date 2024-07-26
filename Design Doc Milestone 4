@@ -78,7 +78,7 @@ Steps:
 Description: This use case describes how to perform addition in the UVSim, adding one number from a specific place in memory to another in the accumulator. 
 Actor: Arithmetic Logic Unit (ALU)
 System: UVSim 
-Goal: Perform addition between two numbers, one from memory and the other that's in the accumulator. 
+Goal: Perform addition between two numbers, one from memory and the other in the accumulator. 
 Steps: 
 1. ALU initiates the Addition operation in the UVSim 
 2. ALU retrieves the number from the desired memory location 
@@ -138,7 +138,7 @@ Steps:
 3. If it is, UVSim branches to the desired memory location, otherwise it does not
 
 #11 Editing Programs in GUI
-Description: Edit BasicML program instructions within the UVSim GUI, including adding, modifying, deleting, cutting, copying and pasting instructions.
+Description: Edit BasicML program instructions within the UVSim GUI, including adding, modifying, deleting, cutting, copying, and pasting instructions.
 Actor: User/Student
 System: UVSim GUI
 Goal: Allow users to edit BasicML program instructions before execution.
@@ -158,3 +158,11 @@ Steps:
 2. User clicks the 'Save Program' button in the UVSim GUI.
 3. UVSim GUI prompts the user to choose any directory and enter a new filename.
 4. UVSim GUI saves the edited program instructions as a '.txt' file in the user-specified folder/directory. 
+
+#13 Open Multiple Files
+Description: The GUI opens multiple instruction files to be swapped between, edited, and executed in the app instance.
+Actor: User/Student
+System: UVSim GUI
+Goal: Allows multiple files to be opened simultaneously in the app.
+Steps:
+~ TODO ~
