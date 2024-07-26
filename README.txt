@@ -30,23 +30,23 @@ cd  \Users\Jakob\Desktop\2024 Software Engineering Project\CS-2450-Group-Project
 
 Example of a .txt file 
 
-+1007 
-+1008 
-+2007 
-+3008 
-+2109 
-+1109 
-+4300 
++010007
++010008
++020007
++030008
++021009
++011009 
++043000 
 
 
 This txt file explained
-‘+1007’: This is a READ operation. It prompts the user to input an integer and stores it in memory to location 07 
-‘+1008’: This is a READ operation. It prompts the user to input an integer and stores it in memory to location 08 
-‘+2007’: This is a LOAD operation. It loads the value stored in memory location 07 into the accumulator 
-‘+3008’: This instruction is an ADD operation. It adds the value stored in memory location 08 to the value currently in the accumulator 
-‘+2109’: This instruction is a STORE operation. It stores the value currently in the accumulator into memory location 09. 
-‘+1109’: This instruction is a WRITE operation. It will write or output the value stored in memory location 09. 
-‘+4300’: This instruction is a HALT operation. It will halt the program, indicating to the computer that the program has finished running.  
+‘+010007’: This is a READ operation. It prompts the user to input an integer and stores it in memory to location 07 
+‘+010008’: This is a READ operation. It prompts the user to input an integer and stores it in memory to location 08 
+‘+020007’: This is a LOAD operation. It loads the value stored in memory location 07 into the accumulator 
+‘+030008’: This instruction is an ADD operation. It adds the value stored in memory location 08 to the value currently in the accumulator 
+‘+021009’: This instruction is a STORE operation. It stores the value currently in the accumulator into memory location 09. 
+‘+011009’: This instruction is a WRITE operation. It will write or output the value stored in memory location 09. 
+‘+043000’: This instruction is a HALT operation. It will halt the program, indicating to the computer that the program has finished running.  
 
 
 Run the UVSim application using Python, providing the name of the python file (UVSimGUI.py), example below. 
@@ -116,29 +116,47 @@ BRANCHNEG = 41 Branch to a specific location in memory if the accumulator is neg
 BRANCHZERO = 42 Branch to a specific location in memory if the accumulator is zero. 
 HALT = 43 Stop the program 
 
- 
+New Features:
+
+UVSim Supports 250 Lines and Three-Digit Memory Addresses:
+The UVSim supports data files containing up to 250 lines, with internal memory registers going from 000 to 249.
+Commands trying to reference a number outside the range of 000-249 will result in an error.
+
+Handling Six-Digit Math Operations:
+The UVSim can handle six-digit math operations with proper overflow handling.
+
+Supporting Old and New File Formats:
+The UVSim supports both old (four-digit) and new (six-digit) file formats.
+
+Conversion From Four-Digit to Six-Digit Format:
+THe UVSim includes a new conversion feature to convert four-digit files to six-digit form.
+
+Multiple Files Open Simultaneously:
+The UVSim GUI now allows multiple files to be opened, edited, and saved within the application.
+Only one file can be executed at a time.
+
 Other txt files (ideas) 
 
 Subtracting two numbers: 
 
-+1007  
-+1008 
-+2007 
-+3108 
-+2109 
-+1109 
-+4300 
++010007
++010008 
++020007 
++031008 
++021009 
++011009 
++043000 
 
  
 Multiplying two numbers: 
 
-+1007  
-+1008 
-+2007 
-+3308 
-+2109 
-+1109 
-+4300 
++010007  
++010008 
++020007 
++033008 
++021009 
++011009 
++043000 
 
 Other Files That Are Needed to Run the Software:
 
