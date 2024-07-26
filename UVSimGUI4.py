@@ -9,7 +9,6 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog, colorchooser
 from tkinter.scrolledtext import ScrolledText
 import os
-from FL import FileLoader
 
 # Import the UVSim class from UVSIM.py
 from UVSIM import UVSim
