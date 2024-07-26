@@ -151,11 +151,13 @@ class UVSimGUI:
                 self.write_to_log("Starting program execution...")
 
                 while self.uvsim.running:
+                    # Instruction is a list containing [opcode, operand, full string instruction]
+                    # The full string instruction is primarily used to detect the length of the instruction
                     instruction = self.uvsim.fetch()
                     if instruction[0] == 10:
-                        self.handle_read(instruction[1])
+                        self.handle_read(instruction[1], instruction[2])
                     elif instruction[0] == 11:
-                        self.handle_write(instruction[1])
+                        self.handle_write(instruction[1], instruction[2])
                     else:
                         self.uvsim.decode_execute(instruction)
 
@@ -164,15 +166,22 @@ class UVSimGUI:
         except Exception as e:
             messagebox.showerror("Error", f"Error running program: {str(e)}")
 
-    def handle_read(self, val):
+    def handle_read(self, val, full):
         operand = int(val)
         value = simpledialog.askinteger("Input", "Enter an integer:")
         if value is not None:
-            if value < -9999 or value > 9999:
-                messagebox.showerror("Error", "Input must be between -9999 and 9999.")
-            else:
-                self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
-                self.write_to_log(f"Input added: {value}")
+            if len(full) == 4:
+                if value < -9999 or value > 9999:
+                    messagebox.showerror("Error", "Input must be between -9999 and 9999.")
+                else:
+                    self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
+                    self.write_to_log(f"Input added: {value}")
+            elif len(full) == 6:
+                if value < -999999 or value > 999999:
+                    messagebox.showerror("Error", "Input must be between -999999 and 999999.")
+                else:
+                    self.uvsim.memory[operand] = f'+{str(value).zfill(6)}'
+                    self.write_to_log(f"Input added: {value}")
         else:
             messagebox.showwarning("Warning", "No input provided.")
 
