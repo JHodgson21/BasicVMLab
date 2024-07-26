@@ -167,3 +167,8 @@ You don't need to mess with this config.txt file. If you'd like to change the co
 
 FL.py
 The FL.py file contains the 'FileLoader' class which is responsible for loading programs from text files into the UVSIM.
+
+IH.py
+The IH.py file contains the InstructionHandler4 and InstructionHandler6 classes for parsing instructions.
+The main purpose of the InstructionHandler4 function is to handle the instructions in the old four-digit format.
+The main purpose of the InstructionHandler6 function is to handle the instructions for the new six-digit format. 
