@@ -72,9 +72,18 @@ class UVSim:
                 self.instruction_counter = operand
         elif operation == 43:  # HALT
             self.running = False
+        self.validate(self.accumulator, instruction)
 
     def output(self, operand):
         print(int(self.memory[operand]))
+        
+    def validate(self, accumulator, instruction):
+        if (len(instruction) == 5):
+            if (accumulator > 9999 or accumulator < -9999):
+                raise Exception("Resultant value larger than 9999 or smaller than -9999.")
+        elif (len(instruction) == 7):
+            if (accumulator > 999999 or accumulator < -999999):
+                raise Exception("Resultant value is larger than 999999 or smaller than -999999.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
