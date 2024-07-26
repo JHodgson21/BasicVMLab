@@ -32,9 +32,9 @@ class UVSim:
 
     def fetch(self):
         inst = self.memory[self.instruction_counter]
-        if (inst.length == 4):
+        if (len(inst) == 5):
             instruction = InstructionHandler4(inst).parse()
-        elif (inst.length == 6):
+        elif (len(inst) == 7):
             instruction = InstructionHandler6(inst).parse()
         self.instruction_counter += 1
         return instruction
