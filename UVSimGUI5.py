@@ -157,7 +157,7 @@ class UVSimGUI:
                     if instruction[0] == 10:
                         self.handle_read(instruction[1], instruction[2])
                     elif instruction[0] == 11:
-                        self.handle_write(instruction[1], instruction[2])
+                        self.handle_write(instruction[1])
                     else:
                         self.uvsim.decode_execute(instruction)
 
