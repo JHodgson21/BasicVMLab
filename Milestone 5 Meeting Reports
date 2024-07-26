@@ -1,0 +1,95 @@
+Group Project Milestone 5 
+
+Meeting Report (9th meeting) 
+
+ 
+
+Friday, July 19th 
+
+Our ninth meeting went well. We read through the instructions as a team for milestone 5 and started delegating tasks for this new sprint. We also set goals for this milestone to try and get it done a little earlier than the day it's due at 11:00pm. 
+
+People in attendance: 
+
+Jake Hodgson 
+
+Ben Carroll 
+
+Jarek Smith 
+
+Michael Page 
+
+ 
+
+Agenda Items Discussed: 
+
+We first discussed our TODO items and what we needed to do to finish these items (for this milestone we didn’t have a lot on our TODO). 
+
+Everyone was delegated tasks to do for this milestone 
+
+We talked about how we wanted to implement the conversion of 4-digit files to 6-digit files. 
+
+We talked about what we needed to do this time around to get a good grade like the last milestone. (what worked well last time and how we could replicate it again this time around). 
+
+ 
+
+Action Items: 
+
+Finish our TODO items:  
+
+Update our requirements document. 
+
+Start updating all our other documents. 
+
+Start working on the new code for this milestone 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Thursday, July 25th, 2024 (10th meeting)  
+
+ 
+
+The last meeting for this sprint went great. The team has made great progress with each of their action items, and we are on track to turn in an amazing project once it's all said and done.  
+
+ 
+
+People in attendance: 
+
+Jake Hodgson 
+
+Ben Carroll 
+
+Jarek Smith 
+
+Michael Page 
+
+ 
+
+Agenda Items Discussed: 
+
+We talked about what code changes we needed to make to fix our overflow issue. 
+
+We talked about our GUI Wireframe and what updates we needed to make to it. 
+
+We talked about the class design document and how we needed to update that as well.  
+
+We also looked at some of our tests for our code.  
+
+ 
+
+Action Items: 
+
+Update our test cases.  
+
+Everyone must double check the code, run the test files, and ensure everything is running perfectly.  
+
+Everyone needs to look at the README.txt file, make sure we don’t have any typos, make sure the milestone 5 new features make sense, and we need to make sure it makes sense to someone who doesn’t run programs.  
+
+Everyone needs to finish their delegated tasks.  
+
+Look at and fix the overflow issue we were having.  
