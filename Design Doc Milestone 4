@@ -165,4 +165,12 @@ Actor: User/Student
 System: UVSim GUI
 Goal: Allows multiple files to be opened simultaneously in the app.
 Steps:
-~ TODO ~
+1. User launches the UVSim GUI.
+2. User hits the 'Load Program' button.
+3. UVSim GUI will allow the user to browse their computer for a program file.
+4. UVSim will then create a new tab file for the loaded file.
+5. User repeats the steps above to open additional files. 
+6. User will then be able to switch between files, to view and edit them. 
+7. The user can open any file, save changes, or execute the program.
+8. User hits 'Run' to execute the active file in the selected tab.
+
