@@ -37,10 +37,10 @@ System: UVSim
 Goal: Load a BasicML program in the UVSim memory starting at location 00 
 Steps: 
 1. Student inputs the BasicML program into UVSim 
-2. The UVSim reads the input (a signed four-digit number) 
-3. The UVSim stores each instruction into consecutive memory slots 
-4. The UVSim validates that the program fits in the memory and that the instructions are valid instructions. 
-5. The UVSim confirms to the user that the program loaded successfully 
+2. UVSim reads the input (a signed four-digit or six-digit number) 
+3. UVSim stores each instruction into consecutive memory slots, storing up to 250 instructions.
+4. UVSim validates that the program fits in the memory and that the instructions are valid. 
+5. UVSim confirms to the user that the program loaded successfully.
 
 #2 I/O Read 
 Description: The program includes functionality to read a word from the keyboard and store it in a specified memory location.
@@ -48,10 +48,11 @@ Actors: I/O Module (UVsim subsystem)
 System: UVSim
 Goal: Read a word from the keyboard into a specific location in memory.
 Steps:
-1. I/O module inititates the I/O READ operation
+1. I/O module initiates the I/O READ operation.
 2. I/O module prompts the user to enter an integer.
-3. User inputs an integer via keyboard.
-4. I/O module stores the input integer into the specified memory location
+3. User inputs an integer via the keyboard.
+4. UVSim validates the input as a four or six-digit number.
+5. The I/O module stores the input integer in the specified memory location.
 
 #3 I/O Write
 Description: The program can write a word from specific memory locations to the screen.
