@@ -10,7 +10,6 @@ from tkinter import filedialog, messagebox, simpledialog, colorchooser
 from tkinter.scrolledtext import ScrolledText
 from tkinter import ttk
 import os
-from FL import FileLoader
 from UVSIM import UVSim
 from IH import InputHandler
 
