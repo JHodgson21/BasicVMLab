@@ -157,11 +157,7 @@ class UVSimGUI:
                     operand = instruction[1]
                     length = instruction[2]
                     if instruction[0] == 10:
-<<<<<<< Updated upstream
-                        self.handle_read(instruction[1])
-=======
                         self.handle_read(operand, length)
->>>>>>> Stashed changes
                     elif instruction[0] == 11:
                         self.handle_write(operand)
                     else:
@@ -172,17 +168,6 @@ class UVSimGUI:
         except Exception as e:
             messagebox.showerror("Error", f"Error running program: {str(e)}")
 
-<<<<<<< Updated upstream
-    def handle_read(self, val):
-        operand = int(val)
-        value = simpledialog.askinteger("Input", "Enter an integer:")
-        if value is not None:
-            if value < -9999 or value > 9999:
-                messagebox.showerror("Error", "Input must be between -9999 and 9999.")
-            else:
-                self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
-                self.write_to_log(f"Input added: {value}")
-=======
     def handle_read(self, val, length):
         operand = int(val)
         value = simpledialog.askinteger("Input", "Enter an integer:")
@@ -194,7 +179,6 @@ class UVSimGUI:
             elif length == 6:
                 self.uvsim.memory[operand] = f'+{str(value).zfill(6)}'
                 self.write_to_log(f"Input added: {value}")
->>>>>>> Stashed changes
         else:
             messagebox.showwarning("Warning", "No input provided.")
 

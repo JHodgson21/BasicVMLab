@@ -12,9 +12,6 @@ class InstructionHandler6:
         self.operand = int(instruction[5:7])
         
     def parse(self):
-<<<<<<< Updated upstream
-        return [self.operation, self.operand]
-=======
         return [self.operation, self.operand, self.instruction]
 
 class InstructionHandler:
@@ -48,4 +45,3 @@ class InputHandler:
             raise Exception(f"Value larger than {max} or smaller than -{max}.")
         else:
             return True
->>>>>>> Stashed changes
