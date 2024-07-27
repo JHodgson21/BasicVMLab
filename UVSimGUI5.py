@@ -12,6 +12,7 @@ from tkinter import ttk
 import os
 from FL import FileLoader
 from UVSIM import UVSim
+from IH import InputHandler
 
 CONFIG_FILE = "config.txt"
 
@@ -153,10 +154,16 @@ class UVSimGUI:
 
                 while self.uvsim.running:
                     instruction = self.uvsim.fetch()
+                    operand = instruction[1]
+                    length = instruction[2]
                     if instruction[0] == 10:
+<<<<<<< Updated upstream
                         self.handle_read(instruction[1])
+=======
+                        self.handle_read(operand, length)
+>>>>>>> Stashed changes
                     elif instruction[0] == 11:
-                        self.handle_write(instruction[1])
+                        self.handle_write(operand)
                     else:
                         self.uvsim.decode_execute(instruction)
 
@@ -165,6 +172,7 @@ class UVSimGUI:
         except Exception as e:
             messagebox.showerror("Error", f"Error running program: {str(e)}")
 
+<<<<<<< Updated upstream
     def handle_read(self, val):
         operand = int(val)
         value = simpledialog.askinteger("Input", "Enter an integer:")
@@ -174,6 +182,19 @@ class UVSimGUI:
             else:
                 self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
                 self.write_to_log(f"Input added: {value}")
+=======
+    def handle_read(self, val, length):
+        operand = int(val)
+        value = simpledialog.askinteger("Input", "Enter an integer:")
+        if value is not None:
+            InputHandler(value, length).validate()
+            if length == 4:
+                self.uvsim.memory[operand] = f'+{str(value).zfill(4)}'
+                self.write_to_log(f"Input added: {value}")
+            elif length == 6:
+                self.uvsim.memory[operand] = f'+{str(value).zfill(6)}'
+                self.write_to_log(f"Input added: {value}")
+>>>>>>> Stashed changes
         else:
             messagebox.showwarning("Warning", "No input provided.")
 

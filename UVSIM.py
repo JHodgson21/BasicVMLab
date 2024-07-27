@@ -6,14 +6,14 @@ Created on Thu Jul 11 14:37:02 2024
 """
 import sys
 from FL import FileLoader
-from IH import InstructionHandler4, InstructionHandler6
+from IH import InstructionHandler, InputHandler
 
 # Name of unittest file
 TESTFILE = "UVSim Testing.py"
 
 class UVSim:
     def __init__(self):
-        self.memory = ['+000000'] * 249  # Initialize memory with +0000
+        self.memory = ['+000000'] * 250  # Initialize memory with +0000
         self.accumulator = 0
         self.instruction_counter = 0
         self.running = True
@@ -32,58 +32,48 @@ class UVSim:
 
     def fetch(self):
         inst = self.memory[self.instruction_counter]
-        if (len(inst) == 5):
-            instruction = InstructionHandler4(inst).parse()
-        elif (len(inst) == 7):
-            instruction = InstructionHandler6(inst).parse()
+        info = InstructionHandler(inst).parse()
         self.instruction_counter += 1
-        return instruction
+        return info
 
     def decode_execute(self, instruction):
-        
-        operation = instruction[0]
-        operand = instruction[1]
-        if instruction[0] == '-':
-            operation = -operation
+        opcode = instruction[0]
+        operand = instruction[1] 
+        length = instruction[2]
 
-        if operation == 10:  # READ
+        if opcode == 10:  # READ
             pass  # READ is handled separately
-        elif operation == 11:  # WRITE
+        elif opcode == 11:  # WRITE
             self.output(operand)
-        elif operation == 20:  # LOAD
+        elif opcode == 20:  # LOAD
             self.accumulator = int(self.memory[operand])
-        elif operation == 21:  # STORE
-            self.memory[operand] = f'+{str(self.accumulator).zfill(4)}'
-        elif operation == 30:  # ADD
+        elif opcode == 21:  # STORE
+            if length == 4:
+                self.memory[operand] = f'+{str(self.accumulator).zfill(4)}'
+            elif length == 6:
+                self.memory[operand] = f'+{str(self.accumulator).zfill(6)}'
+        elif opcode == 30:  # ADD
             self.accumulator += int(self.memory[operand])
-        elif operation == 31:  # SUBTRACT
+        elif opcode == 31:  # SUBTRACT
             self.accumulator -= int(self.memory[operand])
-        elif operation == 32:  # DIVIDE
+        elif opcode == 32:  # DIVIDE
             self.accumulator //= int(self.memory[operand])
-        elif operation == 33:  # MULTIPLY
+        elif opcode == 33:  # MULTIPLY
             self.accumulator *= int(self.memory[operand])
-        elif operation == 40:  # BRANCH
+        elif opcode == 40:  # BRANCH
             self.instruction_counter = operand
-        elif operation == 41:  # BRANCHNEG
+        elif opcode == 41:  # BRANCHNEG
             if self.accumulator < 0:
                 self.instruction_counter = operand
-        elif operation == 42:  # BRANCHZERO
+        elif opcode == 42:  # BRANCHZERO
             if self.accumulator == 0:
                 self.instruction_counter = operand
-        elif operation == 43:  # HALT
+        elif opcode == 43:  # HALT
             self.running = False
-        self.validate(self.accumulator, instruction)
+        InputHandler(self.accumulator, length).validate()
 
     def output(self, operand):
         print(int(self.memory[operand]))
-        
-    def validate(self, accumulator, instruction):
-        if (len(instruction) == 5):
-            if (accumulator > 9999 or accumulator < -9999):
-                raise Exception("Resultant value larger than 9999 or smaller than -9999.")
-        elif (len(instruction) == 7):
-            if (accumulator > 999999 or accumulator < -999999):
-                raise Exception("Resultant value is larger than 999999 or smaller than -999999.")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
